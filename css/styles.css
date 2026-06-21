@@ -70,13 +70,13 @@ a:hover {
 }
 
 .site-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--text);
+  display: block;
 }
 
-.site-title span {
-  color: var(--accent);
+.site-title img {
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
 .site-nav ul {
