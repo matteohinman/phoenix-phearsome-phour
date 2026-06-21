@@ -222,6 +222,20 @@ main {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
+.ultra-section {
+  margin-top: 2.5rem;
+}
+
+.ultra-card {
+  margin-top: 1.5rem;
+  padding: 2.5rem;
+  border-radius: 10px;
+}
+
+.ultra-card h3 {
+  font-size: 1.75rem;
+}
+
 table.leaderboard {
   width: 100%;
   border-collapse: collapse;
