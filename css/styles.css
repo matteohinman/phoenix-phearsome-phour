@@ -69,8 +69,23 @@ a:hover {
   padding: 1.25rem 1.5rem;
 }
 
-.site-title {
-  display: block;
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  color: var(--muted);
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+.social-links a.featured {
+  color: var(--accent);
 }
 
 .site-nav ul {
