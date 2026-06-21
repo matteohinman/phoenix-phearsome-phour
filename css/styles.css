@@ -169,9 +169,28 @@ main {
 }
 
 .tier-card {
+  display: block;
   border-radius: 8px;
   padding: 1.5rem;
   border: 1px solid var(--border);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.tier-card:hover {
+  opacity: 0.88;
+  text-decoration: none;
+}
+
+.req-banner {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  margin: 0.5rem 0 1rem;
 }
 
 .tier-card h3 {
