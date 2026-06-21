@@ -270,7 +270,7 @@ table.leaderboard th {
   font-style: italic;
 }
 
-.route-card .stats {
+.stats {
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -278,12 +278,40 @@ table.leaderboard th {
   font-size: 0.9rem;
 }
 
-.route-card .stats .label {
+.stats .label {
   display: block;
   color: var(--muted);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.route-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.route-photo:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.route-photo-lg {
+  aspect-ratio: 16 / 9;
+  max-width: 640px;
+  font-size: 1rem;
 }
 
 .form-embed {
