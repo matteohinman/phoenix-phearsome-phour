@@ -6,7 +6,7 @@ function renderLeaderboard() {
   const root = document.getElementById("leaderboard-root");
   if (!leaderboardEntries.length) {
     root.innerHTML =
-      '<div class="empty-state"><p>No finishers yet &mdash; be the first to submit a result.</p></div>';
+      '<div class="empty-state"><p>No finishers yet. Be the first to submit a result.</p></div>';
     return;
   }
 

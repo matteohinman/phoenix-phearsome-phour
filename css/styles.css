@@ -40,6 +40,10 @@ h3 {
   letter-spacing: 0.02em;
 }
 
+h1 {
+  text-align: center;
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
