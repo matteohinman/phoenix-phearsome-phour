@@ -224,6 +224,10 @@ main {
   margin: 0 auto 1.25rem;
 }
 
+.tier-patch-lg.tier-patch-xl {
+  max-width: 360px;
+}
+
 .req-banner {
   display: inline-block;
   padding: 0.4rem 0.9rem;
@@ -298,7 +302,7 @@ main {
 }
 
 .ultra-card .tier-patch {
-  max-width: 220px;
+  max-width: 260px;
 }
 
 table.leaderboard {
