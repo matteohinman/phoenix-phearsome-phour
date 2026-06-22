@@ -206,6 +206,24 @@ main {
   text-decoration: none;
 }
 
+.tier-card-patch {
+  background: var(--bg-alt);
+  text-align: center;
+}
+
+.tier-patch {
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  margin: 0 auto 0.75rem;
+}
+
+.tier-patch-lg {
+  display: block;
+  max-width: 280px;
+  margin: 0 auto 1.25rem;
+}
+
 .req-banner {
   display: inline-block;
   padding: 0.4rem 0.9rem;
