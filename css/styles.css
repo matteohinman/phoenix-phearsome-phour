@@ -297,6 +297,10 @@ main {
   font-size: 1.75rem;
 }
 
+.ultra-card .tier-patch {
+  max-width: 220px;
+}
+
 table.leaderboard {
   width: 100%;
   border-collapse: collapse;
