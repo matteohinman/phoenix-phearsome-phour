@@ -44,6 +44,10 @@ h1 {
   text-align: center;
 }
 
+.text-center {
+  text-align: center;
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
