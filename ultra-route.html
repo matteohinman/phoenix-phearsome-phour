@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix Phearsome Phour 70K | Official Route</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root {
+    --black:     #0f0f0f;
+    --charcoal:  #1c1c1c;
+    --gold:      #c9962a;
+    --gold-dim:  #9a6f1a;
+    --bone:      #e8dfc8;
+    --dust:      #b0a48a;
+    --terracotta:#c45e3a;
+    --sky:       #4a7fa5;
+    --white:     #f5f0e8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--bone);
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 80%, #1a0a00 0%, var(--black) 65%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(201,150,42,0.03) 3px,
+      rgba(201,150,42,0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title .accent {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 0.2em;
+    color: var(--dust);
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat .num {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat .label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .divider {
+    width: 1px;
+    background: var(--gold-dim);
+    opacity: 0.4;
+    align-self: stretch;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  /* SECTIONS */
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+    opacity: 0.3;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--dust);
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    max-width: 65ch;
+  }
+
+  /* ROUTE OVERVIEW */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: rgba(201,150,42,0.15);
+    border: 1px solid rgba(201,150,42,0.15);
+    margin-top: 2.5rem;
+  }
+
+  .overview-cell {
+    background: var(--charcoal);
+    padding: 1.5rem;
+  }
+
+  .overview-cell .val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .overview-cell .key {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  /* ELEVATION PROFILE */
+  .elev-chart {
+    width: 100%;
+    height: 180px;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .elev-chart svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* WAYPOINT TABLE */
+  .waypoints {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .waypoints thead tr {
+    border-bottom: 1px solid rgba(201,150,42,0.3);
+  }
+
+  .waypoints th {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: left;
+    padding: 0.5rem 0.75rem 0.75rem;
+    font-weight: 400;
+  }
+
+  .waypoints td {
+    padding: 0.85rem 0.75rem;
+    color: var(--bone);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  .waypoints tr:hover td { background: rgba(201,150,42,0.04); }
+
+  .waypoints .milestone {
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+  }
+
+  .tag-summit { background: rgba(196,94,58,0.3); color: var(--terracotta); }
+  .tag-valley { background: rgba(74,127,165,0.2); color: var(--sky); }
+  .tag-start  { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-turn   { background: rgba(255,255,255,0.08); color: var(--dust); }
+
+  .coords {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--dust);
+    margin-top: 0.2rem;
+  }
+
+  /* DIRECTIONS */
+  .directions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .direction-card {
+    border: 1px solid rgba(201,150,42,0.2);
+    padding: 2rem;
+    background: var(--charcoal);
+  }
+
+  .direction-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .direction-card .dir-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .direction-card p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  /* RULES */
+  .rules-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+
+  .rules-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--dust);
+    font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .rules-list li .rule-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+    width: 2rem;
+  }
+
+  /* STRAVA LINK */
+  .strava-block {
+    background: var(--charcoal);
+    border: 1px solid rgba(201,150,42,0.2);
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .strava-block p {
+    max-width: none;
+    color: var(--dust);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .strava-link {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .strava-link:hover { background: rgba(201,150,42,0.1); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  /* FULL-WIDTH RULE */
+  .full-rule {
+    width: 100%;
+    height: 1px;
+    background: rgba(201,150,42,0.12);
+  }
+
+  @media (max-width: 600px) {
+    .directions-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .divider { display: none; }
+  }
+
+  /* BACK LINK */
+  .back-link {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-decoration: none;
+    z-index: 1;
+  }
+
+  .back-link:hover {
+    color: var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <a class="back-link" href="ultra.html">&larr; Phoenix Phearsome Phour</a>
+  <p class="eyebrow">Phoenix Mountain Preserve &mdash; Official Ultra Route</p>
+  <h1 class="hero-title">
+    Phoenix Phearsome Phour
+    <span class="accent">70K</span>
+  </h1>
+  <p class="hero-subtitle">Four Mountains &bull; One Continuous Line &bull; No Aid &bull; No Shortcuts</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num">43.8</span>
+      <span class="label">Miles</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">70.4</span>
+      <span class="label">Kilometers</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">11,312</span>
+      <span class="label">Ft Gain</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Mountains</span>
+    </div>
+  </div>
+
+  <p class="scroll-cue">&#9660; Route Details Below</p>
+</div>
+
+<div class="full-rule"></div>
+
+<!-- OVERVIEW -->
+<section>
+  <p class="section-label">Route Overview</p>
+  <h2>What You're Getting Into</h2>
+  <p>The Phoenix Phearsome Phour 70K is a continuous out-and-back ultra linking all four major summits of the Phoenix Mountain Preserve: Camelback Mountain, Piestewa Peak, North Mountain, and Shaw Butte. Start and finish at street parking on 36th St at Pima Canyon Dr. Eight total summit hits. One continuous push.</p>
+  <p>The route is not a simple point-to-point. It opens with a Camelback yoyo: south on 36th St to Lincoln Dr, east on Lincoln to Tatum Blvd, south on Tatum to Echo Canyon Trailhead, up to the Camelback summit, down Cholla, back up Cholla, summit again, back down Echo Canyon, west on Lincoln, north on 36th St to the entrance of the Phoenix Mountain Preserve, then left heading west to the Piestewa Peak Trailhead: east side up, 302 connector and Freedom Trail down, Pearl Charles Trail, Dreamy Draw, west on Trail 100 through the SR-51 and Cave Creek Road tunnels to 7th Street Trailhead, North Mountain out-and-back to the Quechan Area 7 ramada and back (summit hit twice before moving on), then Shaw Butte double summit as the turnaround. After Shaw Butte, runners return to 7th Street Trailhead for the final time, then head east on Trail 100 through the Cave Creek Road and SR-51 tunnels to Dreamy Draw. From Dreamy Draw it is the same route in reverse all the way back east: Pearl Charles Trail, Freedom Trail, 302 connector, up and over Piestewa, east-side descent, south on the preserve trail back to 36th Street, east on Lincoln, south on Tatum, east on Lincoln, south on 36th St to the finish.</p>
+  <p>This is the first time this route has been formally defined and documented. This page and the official TCX file are the canonical record. An unsanctioned FKT was self-submitted by an individual not affiliated with the Phoenix Phearsome Phour Challenge, on a route that was never officially defined. That attempt is not recognized. The official route did not exist in documented form until now. There is no official FKT. The record is open.</p>
+
+  <div class="overview-grid">
+    <div class="overview-cell">
+      <div class="val">43.8 mi</div>
+      <div class="key">Total Distance</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">70.4 km</div>
+      <div class="key">Metric Distance</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">11,312 ft</div>
+      <div class="key">Elevation Gain</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">11,312 ft</div>
+      <div class="key">Elevation Loss</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">2,660 ft</div>
+      <div class="key">Max Elevation</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">1,320 ft</div>
+      <div class="key">Min Elevation</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">1,474 ft</div>
+      <div class="key">Start / Finish Elevation</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">24 hr</div>
+      <div class="key">Time Limit (TBD)</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- ELEVATION PROFILE -->
+<section>
+  <p class="section-label">Elevation Profile</p>
+  <h2>The Shape of the Route</h2>
+  <p>The route opens with a Camelback yoyo, hitting both summits before mile 7. After passing back through the 36th and Lincoln intersection, it heads north through Piestewa, North Mountain, and Shaw Butte. The turnaround at Shaw Butte sits near the midpoint. The return mirrors the outbound in reverse, with Piestewa as the final major climb before the descent home. Symmetric elevation gain and loss: 11,312 ft each way.</p>
+
+  <div class="elev-chart">
+    <svg viewBox="0 0 900 175" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Grid lines -->
+      <line x1="0" y1="40" x2="900" y2="40" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+      <line x1="0" y1="90" x2="900" y2="90" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+      <line x1="0" y1="140" x2="900" y2="140" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+
+      <defs>
+        <linearGradient id="elevGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c9962a" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#c9962a" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Area fill — generated from TCX data, sampled every 0.2 miles -->
+      <path d="M 0.0,162 L 0.0,144.8 4.1,150.2 8.2,154.4 12.3,153.6 16.5,153.1 20.6,153.5 24.7,156.5 28.8,156.9 32.9,157.6 37.0,159.1 41.1,160.3 45.2,162.0 49.4,158.9 53.5,152.3 57.6,144.5 61.7,126.7 65.8,106.7 69.9,86.2 74.0,61.0 78.2,12.0 82.3,42.6 86.4,66.2 90.5,87.8 94.6,101.9 98.7,123.4 102.8,145.0 106.9,155.0 111.1,140.7 115.2,119.3 119.3,97.7 123.4,85.6 127.5,64.4 131.6,33.0 135.7,20.1 139.9,67.1 144.0,92.7 148.1,114.7 152.2,129.2 156.3,147.7 160.4,153.6 164.5,159.4 168.6,161.6 172.8,160.2 176.9,158.8 181.0,157.4 185.1,156.9 189.2,155.0 193.3,153.4 197.4,152.9 201.6,154.0 205.7,153.6 209.8,149.7 213.9,144.5 218.0,127.9 222.1,116.8 226.2,111.0 230.3,105.1 234.5,104.6 238.6,123.1 242.7,136.9 246.8,135.9 250.9,138.0 255.0,147.4 259.1,138.7 263.3,119.3 267.4,98.4 271.5,81.4 275.6,51.6 279.7,28.4 283.8,57.6 287.9,84.1 292.0,102.2 296.2,122.1 300.3,137.3 304.4,126.8 308.5,123.7 312.6,139.8 316.7,140.1 320.8,133.7 325.0,152.9 329.1,151.9 333.2,149.8 337.3,150.7 341.4,149.3 345.5,154.2 349.6,151.6 353.7,145.3 357.9,137.1 362.0,136.6 366.1,132.9 370.2,131.7 374.3,134.1 378.4,131.5 382.5,133.1 386.7,135.2 390.8,139.5 394.9,148.0 399.0,150.0 403.1,152.4 407.2,152.4 411.3,149.9 415.4,143.7 419.6,138.4 423.7,140.8 427.8,146.4 431.9,147.9 436.0,146.3 440.1,147.2 444.2,148.4 448.4,142.7 452.5,136.3 456.6,126.5 460.7,113.5 464.8,97.2 468.9,81.6 473.0,102.9 477.1,134.8 481.3,149.6 485.4,140.5 489.5,111.8 493.6,80.0 497.7,94.2 501.8,109.7 505.9,123.3 510.1,135.1 514.2,140.2 518.3,146.3 522.4,151.4 526.5,153.6 530.6,155.3 534.7,156.1 538.8,145.7 543.0,128.9 547.1,117.4 551.2,101.7 555.3,93.8 559.4,87.4 563.5,72.5 567.6,83.7 571.8,92.3 575.9,101.7 580.0,113.6 584.1,128.2 588.2,141.4 592.3,156.2 596.4,138.8 600.5,126.6 604.7,107.4 608.8,100.7 612.9,90.2 617.0,80.3 621.1,74.6 625.2,89.6 629.3,98.1 633.5,103.2 637.6,121.9 641.7,132.5 645.8,151.4 649.9,153.8 654.0,153.9 658.1,152.6 662.2,149.7 666.4,147.4 670.5,145.1 674.6,147.8 678.7,144.3 682.8,139.9 686.9,139.9 691.0,145.6 695.2,151.0 699.3,153.5 703.4,151.6 707.5,146.9 711.6,147.1 715.7,131.9 719.8,134.8 723.9,133.0 728.1,132.1 732.2,134.1 736.3,129.4 740.4,132.9 744.5,137.5 748.6,140.2 752.7,146.5 756.9,151.6 761.0,152.9 765.1,149.5 769.2,150.2 773.3,148.7 777.4,150.7 781.5,151.0 785.6,125.1 789.8,142.1 793.9,136.9 798.0,122.7 802.1,130.0 806.2,135.2 810.3,114.9 814.4,95.1 818.6,77.1 822.7,47.1 826.8,33.8 830.9,63.0 835.0,84.4 839.1,102.7 843.2,126.4 847.3,143.8 851.5,133.4 855.6,144.7 859.7,143.5 863.8,138.3 867.9,137.7 872.0,134.0 876.1,116.6 880.3,96.9 884.4,106.9 888.5,114.9 892.6,120.0 896.7,134.6 L 896.7,162 Z" fill="url(#elevGrad)"/>
+
+      <!-- Elevation line -->
+      <polyline points="0.0,144.8 4.1,150.2 8.2,154.4 12.3,153.6 16.5,153.1 20.6,153.5 24.7,156.5 28.8,156.9 32.9,157.6 37.0,159.1 41.1,160.3 45.2,162.0 49.4,158.9 53.5,152.3 57.6,144.5 61.7,126.7 65.8,106.7 69.9,86.2 74.0,61.0 78.2,12.0 82.3,42.6 86.4,66.2 90.5,87.8 94.6,101.9 98.7,123.4 102.8,145.0 106.9,155.0 111.1,140.7 115.2,119.3 119.3,97.7 123.4,85.6 127.5,64.4 131.6,33.0 135.7,20.1 139.9,67.1 144.0,92.7 148.1,114.7 152.2,129.2 156.3,147.7 160.4,153.6 164.5,159.4 168.6,161.6 172.8,160.2 176.9,158.8 181.0,157.4 185.1,156.9 189.2,155.0 193.3,153.4 197.4,152.9 201.6,154.0 205.7,153.6 209.8,149.7 213.9,144.5 218.0,127.9 222.1,116.8 226.2,111.0 230.3,105.1 234.5,104.6 238.6,123.1 242.7,136.9 246.8,135.9 250.9,138.0 255.0,147.4 259.1,138.7 263.3,119.3 267.4,98.4 271.5,81.4 275.6,51.6 279.7,28.4 283.8,57.6 287.9,84.1 292.0,102.2 296.2,122.1 300.3,137.3 304.4,126.8 308.5,123.7 312.6,139.8 316.7,140.1 320.8,133.7 325.0,152.9 329.1,151.9 333.2,149.8 337.3,150.7 341.4,149.3 345.5,154.2 349.6,151.6 353.7,145.3 357.9,137.1 362.0,136.6 366.1,132.9 370.2,131.7 374.3,134.1 378.4,131.5 382.5,133.1 386.7,135.2 390.8,139.5 394.9,148.0 399.0,150.0 403.1,152.4 407.2,152.4 411.3,149.9 415.4,143.7 419.6,138.4 423.7,140.8 427.8,146.4 431.9,147.9 436.0,146.3 440.1,147.2 444.2,148.4 448.4,142.7 452.5,136.3 456.6,126.5 460.7,113.5 464.8,97.2 468.9,81.6 473.0,102.9 477.1,134.8 481.3,149.6 485.4,140.5 489.5,111.8 493.6,80.0 497.7,94.2 501.8,109.7 505.9,123.3 510.1,135.1 514.2,140.2 518.3,146.3 522.4,151.4 526.5,153.6 530.6,155.3 534.7,156.1 538.8,145.7 543.0,128.9 547.1,117.4 551.2,101.7 555.3,93.8 559.4,87.4 563.5,72.5 567.6,83.7 571.8,92.3 575.9,101.7 580.0,113.6 584.1,128.2 588.2,141.4 592.3,156.2 596.4,138.8 600.5,126.6 604.7,107.4 608.8,100.7 612.9,90.2 617.0,80.3 621.1,74.6 625.2,89.6 629.3,98.1 633.5,103.2 637.6,121.9 641.7,132.5 645.8,151.4 649.9,153.8 654.0,153.9 658.1,152.6 662.2,149.7 666.4,147.4 670.5,145.1 674.6,147.8 678.7,144.3 682.8,139.9 686.9,139.9 691.0,145.6 695.2,151.0 699.3,153.5 703.4,151.6 707.5,146.9 711.6,147.1 715.7,131.9 719.8,134.8 723.9,133.0 728.1,132.1 732.2,134.1 736.3,129.4 740.4,132.9 744.5,137.5 748.6,140.2 752.7,146.5 756.9,151.6 761.0,152.9 765.1,149.5 769.2,150.2 773.3,148.7 777.4,150.7 781.5,151.0 785.6,125.1 789.8,142.1 793.9,136.9 798.0,122.7 802.1,130.0 806.2,135.2 810.3,114.9 814.4,95.1 818.6,77.1 822.7,47.1 826.8,33.8 830.9,63.0 835.0,84.4 839.1,102.7 843.2,126.4 847.3,143.8 851.5,133.4 855.6,144.7 859.7,143.5 863.8,138.3 867.9,137.7 872.0,134.0 876.1,116.6 880.3,96.9 884.4,106.9 888.5,114.9 892.6,120.0 896.7,134.6" fill="none" stroke="#c9962a" stroke-width="1.5"/>
+
+      <!-- Summit markers - positions derived from TCX data -->
+      <circle cx="78.2" cy="12.0" r="3" fill="#c9962a"/>
+      <text x="78.2" y="8" text-anchor="middle" fill="#c9962a" font-size="7" font-family="Courier New">CAMEL</text>
+      <circle cx="135.7" cy="20.1" r="3" fill="#c9962a"/>
+      <text x="135.7" y="8" text-anchor="middle" fill="#c9962a" font-size="7" font-family="Courier New">CAMEL</text>
+      <circle cx="279.7" cy="28.4" r="3" fill="#c45e3a"/>
+      <text x="279.7" y="24" text-anchor="middle" fill="#c45e3a" font-size="7" font-family="Courier New">PIE</text>
+      <circle cx="467.9" cy="86.5" r="3" fill="#4a7fa5"/>
+      <text x="467.9" y="74" text-anchor="middle" fill="#4a7fa5" font-size="7" font-family="Courier New">NORTH</text>
+      <circle cx="493.6" cy="80.0" r="3" fill="#4a7fa5"/>
+      <text x="493.6" y="68" text-anchor="middle" fill="#4a7fa5" font-size="7" font-family="Courier New">NORTH</text>
+      <circle cx="563.5" cy="72.5" r="3" fill="#b0a48a"/>
+      <text x="550" y="65" text-anchor="middle" fill="#b0a48a" font-size="7" font-family="Courier New">SHAW</text>
+      <circle cx="621.1" cy="74.6" r="3" fill="#b0a48a"/>
+      <text x="634" y="65" text-anchor="middle" fill="#b0a48a" font-size="7" font-family="Courier New">SHAW</text>
+      <circle cx="825.8" cy="24.8" r="3" fill="#c45e3a"/>
+      <text x="825.8" y="20" text-anchor="middle" fill="#c45e3a" font-size="7" font-family="Courier New">PIE</text>
+
+      <!-- Turnaround marker -->
+      <line x1="592" y1="0" x2="592" y2="153" stroke="rgba(176,164,138,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="592" y="160" text-anchor="middle" fill="rgba(176,164,138,0.5)" font-size="7" font-family="Courier New">TURN</text>
+
+      <!-- Mile axis -->
+      <text x="2" y="172" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="start">0</text>
+      <text x="205.7" y="172" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="middle">10</text>
+      <text x="411.3" y="172" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="middle">20</text>
+      <text x="617.0" y="172" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="middle">30</text>
+      <text x="822.7" y="172" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="middle">40</text>
+      <text x="894" y="172" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="end">43.8 mi</text>
+    </svg>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WAYPOINTS -->
+<section>
+  <p class="section-label">Key Waypoints</p>
+  <h2>Full Route Sequence</h2>
+  <p>All coordinates are from the official TCX file. Camelback is summited twice at the start before heading north. Piestewa, North Mountain, and Shaw Butte are each hit once outbound and once on the return. The turnaround is the second Shaw Butte summit near mile 27.4.</p>
+
+  <table class="waypoints">
+    <thead>
+      <tr>
+        <th>Mile</th>
+        <th>Location</th>
+        <th>Elevation</th>
+        <th>Coordinates</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="milestone">0.0</td>
+        <td>36th St at Pima Canyon Dr <span class="tag tag-start">Start</span><div class="coords" style="margin-top:0.3rem;">Street parking, west side of 36th St</div></td>
+        <td>1,474 ft</td>
+        <td><div class="coords">33.53542, -112.00235</div></td>
+      </tr>
+      <tr>
+        <td>~2.70</td>
+        <td>Echo Canyon Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">36th St south → Lincoln Dr east → Tatum Blvd south → Echo Canyon. Fountain, restrooms, soda machine with Gatorade.</div></td>
+        <td>1,320 ft</td>
+        <td><div class="coords">33.52702, -111.97576</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~3.79</td>
+        <td>Camelback Mountain Summit <span class="tag tag-summit">Summit 1 of 8</span><div class="coords" style="margin-top:0.3rem;">Echo Canyon up → summit → Cholla descent → Cholla back up</div></td>
+        <td>2,660 ft</td>
+        <td><div class="coords">33.51473, -111.96171</div></td>
+      </tr>
+      <tr>
+        <td>~5.19</td>
+        <td>Cholla Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Bottom of Cholla descent between the two Camelback summits. Restrooms, wash sink, water.</div></td>
+        <td>1,359 ft</td>
+        <td><div class="coords">33.51132, -111.94341</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~6.6</td>
+        <td>Camelback Mountain Summit <span class="tag tag-summit">Summit 2 of 8</span><div class="coords" style="margin-top:0.3rem;">Echo Canyon descent → Tatum north → Lincoln west → 36th St north into preserve</div></td>
+        <td>2,660 ft</td>
+        <td><div class="coords">33.51473, -111.96171</div></td>
+      </tr>
+      <tr>
+        <td>~7.67</td>
+        <td>Echo Canyon Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Bottom of Echo Canyon descent. Fountain, restrooms, soda machine with Gatorade. Last water before Piestewa.</div></td>
+        <td>1,320 ft</td>
+        <td><div class="coords">33.52702, -111.97576</div></td>
+      </tr>
+      <tr>
+        <td>~10.10</td>
+        <td>36th St and Lincoln Dr Intersection<div class="coords" style="margin-top:0.3rem;">Turn right heading north on 36th St toward the Phoenix Mountain Preserve entrance.</div></td>
+        <td>1,320 ft</td>
+        <td><div class="coords">33.52702, -111.97576</div></td>
+      </tr>
+      <tr>
+        <td>~11.84</td>
+        <td>Upper Ramada <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Parking, water, restrooms.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~12.11</td>
+        <td>Freedom Trail Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Freedom Trail starting point. Parking, water, restrooms.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~12.50</td>
+        <td>Piestewa Peak Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Main east-side trailhead. Parking, water, restrooms.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="milestone">~13.6</td>
+        <td>Piestewa Peak Summit <span class="tag tag-summit">Summit 3 of 8</span><div class="coords" style="margin-top:0.3rem;">East-side trailhead up → summit → 302 connector → Freedom Trail descent</div></td>
+        <td>2,542 ft</td>
+        <td><div class="coords">33.54762, -112.02111</div></td>
+      </tr>
+      <tr>
+        <td>~16.75</td>
+        <td>Dreamy Draw Recreation Area <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Westbound outbound. Fountain, restrooms, ramadas. After leaving Dreamy Draw, head west on Trail 100 through the SR-51 and Cave Creek Road tunnels to 7th Street Trailhead.</div></td>
+        <td>1,389 ft</td>
+        <td><div class="coords">33.56479, -112.02914</div></td>
+      </tr>
+      <tr>
+        <td>~16.94</td>
+        <td>Trail 100 Tunnel <div class="coords" style="margin-top:0.3rem;">Underpass beneath SR-51 motorway. Follow Trail 100 through the tunnel heading west toward 7th Street Trailhead.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~17.73</td>
+        <td>Cave Creek Road Tunnel <div class="coords" style="margin-top:0.3rem;">Underpass beneath Cave Creek Road heading westbound toward 7th Street Trailhead.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~21.53</td>
+        <td>7th Street Trailhead / North Mountain Visitor Center <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Fountain, restrooms, snack shop (hours vary — verify before your attempt). Reached via Trail 100 westbound from Dreamy Draw through the SR-51 tunnel then the Cave Creek Road tunnel.</div></td>
+        <td>1,389 ft</td>
+        <td><div class="coords">33.56479, -112.02914</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~22.8</td>
+        <td>North Mountain Summit <span class="tag tag-summit">Summit 4 of 8</span><div class="coords" style="margin-top:0.3rem;">Out-and-back from 7th Street Trailhead: up and over to Quechan Area 7 ramada</div></td>
+        <td>2,061 ft</td>
+        <td><div class="coords">33.58530, -112.07212</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~24.0</td>
+        <td>North Mountain Summit <span class="tag tag-summit">Summit 5 of 8</span><div class="coords" style="margin-top:0.3rem;">Return from Quechan Area 7 ramada back over summit to 7th Street Trailhead</div></td>
+        <td>2,061 ft</td>
+        <td><div class="coords">33.58530, -112.07212</div></td>
+      </tr>
+      <tr>
+        <td>~25.30</td>
+        <td>7th Street Trailhead / North Mountain Visitor Center <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Fountain, restrooms, snack shop (hours vary — verify before your attempt)</div></td>
+        <td>1,389 ft</td>
+        <td><div class="coords">33.56479, -112.02914</div></td>
+      </tr>
+      <tr>
+        <td>~26.06</td>
+        <td>Shaw Butte Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Fountain at the base before the Shaw Butte double summit</div></td>
+        <td>1,374 ft</td>
+        <td><div class="coords">33.60273, -112.07406</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~27.41</td>
+        <td>Shaw Butte Summit <span class="tag tag-summit">Summit 6 of 8</span> <span class="tag tag-turn">Turnaround</span><div class="coords" style="margin-top:0.3rem;">First Shaw Butte summit. Begin descent to valley before second summit.</div></td>
+        <td>2,124 ft</td>
+        <td><div class="coords">33.59413, -112.08659</div></td>
+      </tr>
+      <tr>
+        <td>~28.79</td>
+        <td>Shaw Butte Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Fountain at the base between the two Shaw Butte summits.</div></td>
+        <td>1,374 ft</td>
+        <td><div class="coords">33.60273, -112.07406</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~30.12</td>
+        <td>Shaw Butte Summit <span class="tag tag-summit">Summit 7 of 8</span><div class="coords" style="margin-top:0.3rem;">Second Shaw Butte summit. Begin descent heading back south.</div></td>
+        <td>2,124 ft</td>
+        <td><div class="coords">33.59413, -112.08659</div></td>
+      </tr>
+      <tr>
+        <td>~31.41</td>
+        <td>Right Turn — Return to 7th Street Trailhead<div class="coords" style="margin-top:0.3rem;">Turn right here after the second Shaw Butte summit. Head back east to 7th Street Trailhead for the final time.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~32.15</td>
+        <td>7th Street Trailhead / North Mountain Visitor Center <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Fountain, restrooms, snack shop (hours vary — verify before your attempt). From here head east on Trail 100 through the Cave Creek Road tunnel, then the SR-51 tunnel, continuing east to Dreamy Draw.</div></td>
+        <td>1,389 ft</td>
+        <td><div class="coords">33.56479, -112.02914</div></td>
+      </tr>
+      <tr>
+        <td>~34.00</td>
+        <td>Cave Creek Road Tunnel <div class="coords" style="margin-top:0.3rem;">Underpass beneath Cave Creek Road heading eastbound toward Dreamy Draw and Piestewa.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~36.76</td>
+        <td>Trail 100 Tunnel <div class="coords" style="margin-top:0.3rem;">Underpass beneath SR-51 motorway. Follow Trail 100 through the tunnel heading east toward Dreamy Draw and Piestewa.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~37.03</td>
+        <td>Dreamy Draw Recreation Area <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Eastbound return. Fountain, restrooms, ramadas. Head back to the Freedom Trail to summit Piestewa one last time.</div></td>
+        <td>1,389 ft</td>
+        <td><div class="coords">33.56479, -112.02914</div></td>
+      </tr>
+      <tr>
+        <td class="milestone">~40.15</td>
+        <td>Piestewa Peak Summit <span class="tag tag-summit">Summit 8 of 8</span><div class="coords" style="margin-top:0.3rem;">302 connector up → summit → east-side descent to trailhead</div></td>
+        <td>2,542 ft</td>
+        <td><div class="coords">33.54747, -112.02111</div></td>
+      </tr>
+      <tr>
+        <td>~41.67</td>
+        <td>Piestewa Peak Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Main east-side trailhead. Parking, water, restrooms.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~42.00</td>
+        <td>Freedom Trail Trailhead <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Freedom Trail starting point. Parking, water, restrooms.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~42.28</td>
+        <td>Upper Ramada <span class="tag tag-valley">Water Stop</span><div class="coords" style="margin-top:0.3rem;">Parking, water, restrooms.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>~43.2</td>
+        <td>Turn right onto 36th St<div class="coords" style="margin-top:0.3rem;">Head south on 36th St to finish. It's all downhill from here.</div></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="milestone">43.8</td>
+        <td>36th St at Pima Canyon Dr <span class="tag tag-start">Finish</span><div class="coords" style="margin-top:0.3rem;">It's all downhill from the preserve exit. You earned this.</div></td>
+        <td>1,474 ft</td>
+        <td><div class="coords">33.53542, -112.00235</div></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WATER STOPS -->
+<section>
+  <p class="section-label">Hydration</p>
+  <h2>Water Stops</h2>
+  <p>Seven confirmed public water sources on the outbound leg, all accessible again on the return. That is 14 total water access points across the full route. For a self-supported desert ultra, that is unusually good coverage. Use every one of them. The gaps between stops can still span several miles of exposed climbing in full sun.</p>
+  <p style="font-size:0.85rem; color:var(--terracotta);">Note: The church fountain at Lincoln and 36th St is community-reported and not city-maintained. Verify it is operational before your attempt. All other stops are city-maintained public facilities.</p>
+
+  <table class="waypoints" style="margin-top:1.5rem;">
+    <thead>
+      <tr>
+        <th>Approx. Mile</th>
+        <th>Water Stop</th>
+        <th>Facilities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="milestone">0.0 / ~5.19</td>
+        <td>Cholla Trailhead</td>
+        <td>Fountain, restrooms, wash sink</td>
+      </tr>
+      <tr>
+        <td class="milestone">~2.70 / ~7.67</td>
+        <td>Echo Canyon Trailhead</td>
+        <td>Fountain, restrooms, soda machine with Gatorade</td>
+      </tr>
+      <tr>
+        <td>~3–4 / ~40–41</td>
+        <td>Lincoln Dr and 36th St, SW corner church</td>
+        <td>Outdoor fountain, 24/7. Community-reported.</td>
+      </tr>
+      <tr>
+        <td class="milestone">~5–6 / ~38–39</td>
+        <td>Piestewa Peak Trailhead / 302 Trailhead</td>
+        <td>Fountain, restrooms</td>
+      </tr>
+      <tr>
+        <td>~16.75 / ~37.03</td>
+        <td>Dreamy Draw Recreation Area</td>
+        <td>Fountain, restrooms, ramadas</td>
+      </tr>
+      <tr>
+        <td class="milestone">~21.53 / ~22.23</td>
+        <td>7th Street Trailhead / North Mountain Visitor Center</td>
+        <td>Fountain, restrooms, snacks and water for purchase at Visitor Center (hours vary — verify before your attempt)</td>
+      </tr>
+      <tr>
+        <td>~26.06</td>
+        <td>Shaw Butte Trailhead</td>
+        <td>Fountain</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- RULES -->
+<section>
+  <p class="section-label">Route Rules</p>
+  <h2>What Makes It Official</h2>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num">01</span>
+      <span>Start and finish at street parking on 36th St at Pima Canyon Dr. Do not park on church property at Lincoln and 36th St.</span>
+    </li>
+    <li>
+      <span class="rule-num">02</span>
+      <span>Complete all summits in sequence using the designated trails. Camelback: road approach via Lincoln and Tatum to Echo Canyon, up to summit, down Cholla, back up Cholla, summit again, back down Echo Canyon (both summits hit at the start before heading north). Piestewa: east-side trailhead approach to summit, 302 connector and Freedom Trail descent (reversed on return). North Mountain: out-and-back from 7th Street Trailhead, over the summit to Quechan Area 7 ramada and back the same way (summit hit twice). Shaw Butte: double summit at the turnaround. Eight total summit hits required.</span>
+    </li>
+    <li>
+      <span class="rule-num">03</span>
+      <span>The route is out-and-back. You must return via the same trail corridor you used on the outbound leg. Side trails that rejoin the main route are not permitted.</span>
+    </li>
+    <li>
+      <span class="rule-num">04</span>
+      <span>The official TCX file (Strava route #3504854829813372808, documented by Matthew Hinman @cosmicsea) is the canonical route definition. Disputes about course compliance reference this file.</span>
+    </li>
+    <li>
+      <span class="rule-num">05</span>
+      <span>No support crew or external aid is permitted on trail. Runners may carry their own supplies and use public water sources along the route.</span>
+    </li>
+    <li>
+      <span class="rule-num">06</span>
+      <span>The route must be completed within the Phoenix Mountain Preserve's posted access hours. Know the hours for each section before you start.</span>
+    </li>
+  </ul>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WARNINGS -->
+<section>
+  <p class="section-label">Before You Go</p>
+  <h2>This Route Will Try to Kill You</h2>
+  <p>That is not hyperbole. The Phoenix Phearsome Phour 70K is 44 miles of fully exposed Sonoran Desert with over 11,000 feet of climbing across some of the most technical urban trails in the country. There is no shade. Not on any of the peaks. Not on the trails between them. Not on the road connectors. Nowhere. The sun will find you because there is nothing to hide behind.</p>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Heat.</strong> This is Phoenix. Ground temperatures on exposed rock can exceed 150 degrees Fahrenheit in summer. The city will close trails during excessive heat warnings. Know the forecast before you start and have a plan if conditions change mid-route. Most deaths and rescues on these trails are heat-related.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Sun exposure.</strong> There is no shade on this route. Not on Camelback. Not on Piestewa. Not on North Mountain. Not on Shaw Butte. Not on the road connectors between them. The entire 44.4 miles is fully exposed from start to finish. Start before dawn or accept that the sun will be on you for the majority of this effort. Sunscreen, sun sleeves, and a hat are not optional.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Trail access hours and closures.</strong> Not every section of this route is open 24 hours. Camelback Mountain trails are open sunrise to sunset only. During excessive heat warnings, the city of Phoenix enforces a mandatory closure from 8 a.m. to 5 p.m. on Camelback and Piestewa Peak. Gated trailheads at Piestewa, North Mountain, and Shaw Butte close at 7 p.m. (9 p.m. in summer). A 44-mile route that starts at dawn can easily run into a hard closure mid-attempt if you are not moving fast enough or conditions change. Know the hours for every section before you leave the car. Check the City of Phoenix Parks and Recreation website the morning of your attempt for any emergency closures.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Do not attempt this in summer. Full stop.</strong> June, July, August, and most of September in Phoenix are not inconvenient. They are dangerous. Daytime temperatures routinely exceed 110 degrees Fahrenheit. The rock surfaces you will be running on can hit 150 degrees. There is no shade. There is no bailout if your core temperature spikes on the summit of Camelback at 10 a.m. with 35 miles still to go. Phoenix Fire Department conducts multiple heat rescues on these trails every single summer week, and those are people doing a 2-mile hike with a water bottle. People die on these trails every year. The Phoenix Phearsome Phour 70K is a cool-season route. October through April. That is it. If you are reading this in May and thinking you can handle it: you cannot. Come back in October.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Rocks.</strong> Camelback's summit sections require hands-and-feet scrambling. Piestewa is loose and technical on the descent. North Mountain has exposed rocky ridgeline. One bad foot placement at mile 35 hurts a lot more than one at mile 5. Pay attention all the way to the finish.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Cactus.</strong> Cholla cactus does not wait for you to touch it. Jumping cholla, prickly pear, and saguaro line the trails throughout the preserve. Stay on trail. Watch your footing. Bring tweezers.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Wildlife.</strong> Rattlesnakes, scorpions, Gila monsters, javelinas, black widows, bobcats, and chupacabras are all residents of the Phoenix Mountain Preserve and are not impressed by your finish-line goal. Watch where you step, where you put your hands, and where you sit down to rest. The chupacabra sightings are unconfirmed but we are not ruling anything out.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c45e3a;">&#9650;</span>
+      <span><strong style="color:var(--white);">You are on your own.</strong> This is an unsupported route through an urban preserve. There is no organization, no aid stations, no sweep team, and no one coming to find you if you go off-route. Carry what you need. Know your limits. Have an exit plan for every section.</span>
+    </li>
+  </ul>
+
+  <div style="margin-top:3rem; border:1px solid rgba(196,94,58,0.4); background:rgba(196,94,58,0.06); padding:2rem;">
+    <p class="section-label" style="margin-bottom:1rem;">Official Stance of the Phoenix Phearsome Phour Challenge</p>
+    <p style="color:var(--bone); font-size:1.05rem; margin-bottom:1rem;">We strongly encourage you not to attempt this route.</p>
+    <p>Seriously. We built it, we documented it, and we are telling you right now that attempting the Phoenix Phearsome Phour 70K is an objectively bad idea that a reasonable person would not pursue. You will be alone on 44 miles of desert trail in the sun, climbing over 11,000 feet across four mountains, dodging rattlesnakes, pulling cholla out of your legs, navigating around angry locals who did not come to Camelback to watch you suffer, and stepping around Runfluencers stopped dead on the trail trying to get the perfect shot for the Gram. All of this while questioning every decision that led you to this moment somewhere around mile 28 on the return leg of Piestewa while the Phoenix sun does what it does best.</p>
+    <p>There is no organization behind this. No one will pull you from the course when you stop making sense. No medic is standing by at Dreamy Draw. No one is tracking your dot. If something goes wrong out there, the desert will not care, and neither will the cholla.</p>
+    <p>If you choose to attempt this route anyway, you do so entirely by your own choice, of your own free will, under your own power, and at your own risk. The Phoenix Phearsome Phour Challenge, its creator, and anyone associated with it accept zero responsibility for what happens to you out there. That includes blisters, sunburn, dehydration, heat stroke, snake bites, cactus-related injuries, twisted ankles, existential crises, or the look on your family's face when you explain what you spent your weekend doing.</p>
+    <p>You have been warned. Repeatedly. In writing. On a website you had to find on purpose.</p>
+    <p style="margin-bottom:0; margin-top:1.2rem; font-family:'Courier New', monospace; font-size:0.75rem; color:var(--gold); letter-spacing:0.1em;">Now go drink some water and think about it.</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- GPX SOURCE -->
+<section>
+  <p class="section-label">Source File</p>
+  <h2>Download the Official GPX</h2>
+  <p>The route is documented on Strava as a saved route. This is the authoritative source for navigation. Load it into your GPS device or phone before attempting the route. Do not rely on memory or third-party route interpretations.</p>
+
+  <div class="strava-block">
+    <p>Strava Route #3504854829813372808 &bull; Documented by Matthew Hinman @cosmicsea &bull; Type: Trail Running</p>
+    <a href="https://www.strava.com/routes/3504854829813372808" class="strava-link" target="_blank">View on Strava &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  &copy; Phoenix Phearsome Phour Challenge &bull; Matthew Hinman &bull; phoenixphearsomephour.com
+</footer>
+
+</body>
+</html>
