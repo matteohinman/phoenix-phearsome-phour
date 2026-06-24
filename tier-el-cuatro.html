@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Cuatro | Phoenix Phearsome Phour Challenge</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root {
+    --black:      #0f0f0f;
+    --charcoal:   #1c1c1c;
+    --gold:       #c9962a;
+    --gold-dim:   #9a6f1a;
+    --bone:       #e8dfc8;
+    --dust:       #b0a48a;
+    --terracotta: #c45e3a;
+    --sky:        #4a7fa5;
+    --white:      #f5f0e8;
+    --tier-a:     #141414;
+    --tier-b:     #c9962a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--bone);
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 80%, #1a1400 0%, var(--black) 65%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(201,150,42,0.04) 3px,
+      rgba(201,150,42,0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title .accent {
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 0.2em;
+    color: var(--dust);
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .tier-badge-hero {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat { text-align: center; }
+
+  .hero-stat .num {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat .label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .divider {
+    width: 1px;
+    background: var(--gold-dim);
+    opacity: 0.4;
+    align-self: stretch;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+    opacity: 0.3;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--dust);
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    max-width: 65ch;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: rgba(201,150,42,0.2);
+    border: 1px solid rgba(201,150,42,0.2);
+    margin-top: 2.5rem;
+  }
+
+  .overview-cell {
+    background: var(--charcoal);
+    padding: 1.5rem;
+  }
+
+  .overview-cell .val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .overview-cell .key {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .peaks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .peak-card {
+    border: 1px solid rgba(201,150,42,0.25);
+    padding: 2rem;
+    background: var(--charcoal);
+  }
+
+  .peak-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+
+  .peak-card .peak-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .peak-card p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .waypoints {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .waypoints thead tr { border-bottom: 1px solid rgba(201,150,42,0.3); }
+
+  .waypoints th {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: left;
+    padding: 0.5rem 0.75rem 0.75rem;
+    font-weight: 400;
+  }
+
+  .waypoints td {
+    padding: 0.85rem 0.75rem;
+    color: var(--bone);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  .waypoints tr:hover td { background: rgba(201,150,42,0.05); }
+  .waypoints .milestone { font-weight: 700; color: var(--white); }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+  }
+
+  .tag-summit { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-valley { background: rgba(74,127,165,0.2); color: var(--sky); }
+  .tag-start  { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-turn   { background: rgba(255,255,255,0.08); color: var(--dust); }
+
+  .rules-list { list-style: none; margin-top: 1.5rem; }
+
+  .rules-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--dust);
+    font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .rules-list li .rule-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+    width: 2rem;
+  }
+
+  .badge-block {
+    background: var(--charcoal);
+    border: 1px solid rgba(201,150,42,0.3);
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .badge-swatch {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border: 1px solid rgba(201,150,42,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge-swatch .swatch-a { width: 100%; height: 60%; background: #141414; border-bottom: 1px solid rgba(201,150,42,0.2); }
+  .badge-swatch .swatch-b { width: 100%; height: 40%; background: var(--gold); }
+
+  .badge-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+
+  .badge-info .badge-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .badge-info p { font-size: 0.9rem; margin-bottom: 0; }
+
+  /* GOLD DIVIDER for El Cuatro */
+  .gold-rule {
+    width: 100%;
+    height: 1px;
+    background: rgba(201,150,42,0.35);
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(201,150,42,0.2);
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .full-rule { width: 100%; height: 1px; background: rgba(201,150,42,0.12); }
+
+  .back-link {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-decoration: none;
+    z-index: 1;
+  }
+
+  .back-link:hover { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .peaks-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .divider { display: none; }
+    .badge-block { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <a class="back-link" href="el-cuatro.html">&larr; Phoenix Phearsome Phour</a>
+  <p class="eyebrow">Phoenix Mountain Preserve &bull; Tiered Summit Challenge &bull; The Summit</p>
+  <span class="tier-badge-hero">Tier 4 of 4</span>
+  <h1 class="hero-title">
+    El
+    <span class="accent">Cuatro</span>
+  </h1>
+  <p class="hero-subtitle">Four Peaks &bull; Four Summits Each &bull; 24 Hours &bull; The Full Four</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Peaks</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">16</span>
+      <span class="label">Total Summits</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">24</span>
+      <span class="label">Hour Window</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Tier</span>
+    </div>
+  </div>
+
+  <p class="scroll-cue">&#9660; Challenge Details Below</p>
+</div>
+
+<div class="full-rule"></div>
+
+<!-- OVERVIEW -->
+<section>
+  <p class="section-label">What It Is</p>
+  <h2>The Top of the Tier System. All of It.</h2>
+  <p>El Cuatro is the final tier of the Phoenix Phearsome Phour Challenge. Four summits per peak. Sixteen total summit hits, all completed on the same calendar day. The number is not a coincidence. The challenge is called the Phearsome Phour. Four peaks. Four tiers. The fourth tier requires four summits of each one. That is the whole structure. El Cuatro is where it closes.</p>
+  <p>If you have worked through the tier system, you know Camelback four times in one day is not an escalation from three times. It is a different conversation. Same for Piestewa, North Mountain, and Shaw Butte. At sixteen summits, you are not just climbing mountains. You are in a sustained negotiation with the Phoenix desert from before sunrise to near midnight, and the desert is negotiating in full sun with no shade and complete indifference to your goal.</p>
+  <p>El Cuatro has been completed by five known individuals. The first recorded completion was by Jamil Coury and Brett Dubois in March 2018, documented on YouTube. That video is part of what inspired the formation of the Phoenix Phearsome Phour Challenge as an organized community effort. Three additional completions were recorded by members of the 48th State Running group. All five completions predate the official route definition. This page and the official challenge documentation at phoenixphearsomephour.com are the authoritative definition of what an official completion now requires.</p>
+  <p>First recorded completion: Jamil Coury and Brett Dubois, March 2018. <a href="https://youtu.be/mtc3iv-IgrI?si=UwkTlAUknJz7mqdI" target="_blank" style="color:var(--gold); font-family:'Courier New',monospace; font-size:0.85rem; letter-spacing:0.05em;">Watch on YouTube &rarr;</a></p>
+
+  <div class="overview-grid">
+    <div class="overview-cell">
+      <div class="val">4</div>
+      <div class="key">Peaks Required</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">4x</div>
+      <div class="key">Summits Per Peak</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">16</div>
+      <div class="key">Total Summits</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">24 hr</div>
+      <div class="key">Time Window</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">5am</div>
+      <div class="key">Earliest Start</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- THE FOUR PEAKS -->
+<section>
+  <p class="section-label">The Peaks</p>
+  <h2>Four Mountains, Sixteen Summits</h2>
+  <p>Each peak must be summited four times, all on the same calendar day. At El Cuatro, route planning is not optional. Managing Camelback's sunrise-to-sunset window across four summits, Piestewa's heat advisory constraints, and the gated access hours at North Mountain and Shaw Butte requires a detailed schedule before the attempt begins. Every peak, every lap, every transition has to fit.</p>
+
+  <div class="peaks-grid">
+    <div class="peak-card">
+      <h3>Camelback Mountain</h3>
+      <p class="peak-meta">2,706 ft &bull; Four summits required</p>
+      <p>Four summits required, completed as two full yo-yos. A yo-yo is a complete traverse: up and over the summit, down the far side, back up and over the summit, and down to the start. Each yo-yo hits the summit twice. Two yo-yos equal four total summit hits. Participants may start from either Echo Canyon or Cholla Trailhead. Echo Canyon allows staging before sunrise with movement at first light. Cholla opens at sunrise. The entire mountain closes at sunset with no exceptions. All four summit hits must fall within that window.</p>
+    </div>
+    <div class="peak-card">
+      <h3>Piestewa Peak</h3>
+      <p class="peak-meta">2,610 ft &bull; Four summits, Y-trail structure fully engaged</p>
+      <p>Four summits required, completed as two full loops. Each loop follows an upside-down Y pattern: up from the main east-side trailhead to the summit, down the 302 switchbacks on the west side, back up to the summit via the east side, and back down to the trailhead. Each loop hits the summit twice. Two full loops equal four total summit hits. The route must follow this structure on both loops. Closes during heat advisories from 8am to 5pm.</p>
+    </div>
+    <div class="peak-card">
+      <h3>North Mountain</h3>
+      <p class="peak-meta">1,919 ft &bull; Four summits required</p>
+      <p>Four summits required, completed as two full yo-yos. A yo-yo is a complete traverse: up and over the summit, down the far side, back up and over the summit, and down to the start. Each yo-yo hits the summit twice. Two yo-yos equal four total summit hits. Participants may start from either the north road end or the Quechan Area 7 ramada side. Choose your starting side, complete the first yo-yo, then complete the second.</p>
+    </div>
+    <div class="peak-card">
+      <h3>Shaw Butte</h3>
+      <p class="peak-meta">2,149 ft &bull; Four summits required</p>
+      <p>Four summits required. Shaw Butte does not get easier with repetition. The trail is consistent and the approach is direct, which means you know exactly what is coming on every lap. Confirm the actual summit on each pass, not the saddle below the communication tower. Four laps of Shaw Butte in a single day will clarify your relationship with the desert in ways that are difficult to describe before you have done it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- SEQUENCE TABLE -->
+<section>
+  <p class="section-label">Summit Sequence</p>
+  <h2>Sixteen Summit Hits Required</h2>
+  <p>El Cuatro requires a pre-planned schedule. The table below documents the summit hit requirements per peak. No prescribed peak order. Plan your sequence around the access constraints for each peak, particularly Camelback's sunrise-to-sunset window and Piestewa's 11pm closing time.</p>
+
+  <table class="waypoints">
+    <thead>
+      <tr>
+        <th>Peak</th>
+        <th>Summit Elevation</th>
+        <th>Summits Required</th>
+        <th>Access Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="milestone">Camelback Mountain <span class="tag tag-summit">x4</span></td>
+        <td>2,706 ft</td>
+        <td>4 summits as 2 full yo-yos. Start from either Echo Canyon or Cholla. Each yo-yo traverses the summit twice. All four hits within the sunrise-to-sunset window.</td>
+        <td>Open sunrise to sunset only. Hard close at sunset. No exceptions. Heat advisory closure 8am to 5pm.</td>
+      </tr>
+      <tr>
+        <td class="milestone">Piestewa Peak <span class="tag tag-summit">x4</span></td>
+        <td>2,610 ft</td>
+        <td>4 summits as 2 full loops. Each loop: east-side trailhead up to summit, down 302 switchbacks west side, back up to summit east side, back down to trailhead.</td>
+        <td>Heat advisory closure 8am to 5pm. Gated trailhead: evening hours apply to all four laps.</td>
+      </tr>
+      <tr>
+        <td class="milestone">North Mountain <span class="tag tag-summit">x4</span></td>
+        <td>1,919 ft</td>
+        <td>4 summits completed as 2 full yo-yos. Each yo-yo traverses the summit twice. Start from either the north road end or the Quechan Area 7 ramada side.</td>
+        <td>Gated trailhead. All four laps must fall within posted access hours.</td>
+      </tr>
+      <tr>
+        <td class="milestone">Shaw Butte <span class="tag tag-summit">x4</span></td>
+        <td>2,149 ft</td>
+        <td>4 summits. Direct out-and-back executed four times. Summit confirmed, not saddle.</td>
+        <td>Gated trailhead. All four laps within posted access hours.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WARNINGS -->
+<section>
+  <p class="section-label">Before You Go</p>
+  <h2>Sixteen Summits. One Day. Read This.</h2>
+  <p>There is no softening available for El Cuatro. This section is a briefing, not an asterisk. If you are reading it as part of your preparation for an actual attempt, read it completely and read it seriously.</p>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Heat and sun exposure.</strong> Sixteen summits means a full day and potentially into the night on exposed desert terrain. You will see the sun rise and set on these peaks. The Sonoran Desert does not moderate itself because you have a goal. Ground temperatures on exposed rock can exceed 160 degrees Fahrenheit in summer and remain dangerously high into September as temperatures begin to ease. Carry more water than you think is reasonable, because a reasonable person is not attempting El Cuatro.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">This does not exist in summer. Not in any form.</strong> El Cuatro is a cool-season challenge. October through April. June through September in the Phoenix desert is not a backdrop for a difficult challenge. It is a context in which people die on these trails doing far less than sixteen summits. Do not interpret the tier system as permission to expand the season. It is not.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Trail access hours: non-negotiable at El Cuatro.</strong> All sixteen summits must be completed on the same calendar day. Echo Canyon opens at 5am, setting the earliest valid start. Piestewa Peak officially closes at 11pm. Camelback must be summited four times between sunrise and sunset. Camelback and Piestewa both close during heat advisories from 8am to 5pm. Gated trailheads at North Mountain and Shaw Butte close in the evening. Every lap of every peak must fit inside these constraints simultaneously. This is the primary logistical problem of El Cuatro, and it must be solved on paper before you leave the car.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Fatigue at this scale is its own hazard.</strong> At sixteen summits, fatigue stops being a discomfort and becomes a safety variable. Decision-making degrades. Foot placement becomes imprecise. Technical sections that were manageable at lap one become consequential at lap four. The risk of a serious injury is highest in the final third of an El Cuatro attempt, not the first. This is the point in the effort where most people who have never been this deep into a challenge stop understanding their own limits. Know yours before you start.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Nutrition is not optional.</strong> El Cuatro burns thousands of calories over the course of an attempt that spans most or all of a day. A calorie deficit at this scale does not feel like hunger. It feels like exhaustion, confusion, and poor judgment. Carry real food in real quantities. Eat on a schedule. Do not wait until you feel depleted to eat, because by then the deficit is already working against you.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Rocks and technical terrain do not get easier.</strong> Camelback's summit scramble is present on all four laps. It demands hands and feet and attention every single time. Piestewa's loose descent requires precise footing through fatigue that compounds across four laps. Technical errors late in a long effort cause serious injuries. Give every technical section the same attention on lap four that you gave it on lap one.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Cactus.</strong> Thirty-two approaches and descents across four mountains. The cholla is not keeping count. It is exactly where it was on your first pass. Watch your footing, watch your arms, bring tweezers, and carry a spare pair because you will use them. This is not dark humor. This is instruction.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">Wildlife.</strong> Rattlesnakes, scorpions, Gila monsters, javelinas, black widows, bobcats, and chupacabras are present throughout the preserve at all hours. You will be on their terrain for an extended period, including potentially at night. Watch where you step and where you put your hands on every lap. Fatigue reduces vigilance. Reduced vigilance on a desert trail with active wildlife is how incidents happen.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:#c9962a;">&#9650;</span>
+      <span><strong style="color:var(--white);">There is no one coming for you.</strong> El Cuatro is a self-supported solo effort. No pacers. No organization, no aid stations, no sweep. No one is tracking your dot. Tell someone your full plan, including which trailheads you will be at and when. Know your bail-out options at every peak on every lap.</span>
+    </li>
+  </ul>
+
+  <div style="margin-top:3rem; border:1px solid rgba(201,150,42,0.4); background:rgba(201,150,42,0.05); padding:2rem;">
+    <p class="section-label" style="margin-bottom:1rem;">Official Stance of the Phoenix Phearsome Phour Challenge</p>
+    <p style="color:var(--bone); font-size:1.05rem; margin-bottom:1rem;">We strongly encourage you not to attempt this challenge.</p>
+    <p>El Cuatro is sixteen summits in a single day. This is the top of the tier system. The gold tier. The one named "The Four" because that is exactly what it is and there was nothing left to add to make it sound more serious. The name is the whole description.</p>
+    <p>We built this tier because it already existed in practice. Jamil Coury and Brett Dubois completed it in March 2018 before anyone had organized it, named it, or written a single rule about it. Three members of the 48th State Running group did it too. That video, and those efforts, are why this challenge exists as a formal community endeavor. El Cuatro is not a theoretical tier. It is a documented, achievable thing that five people have done. The official route now gives it a canonical definition.</p>
+
+    <p>The Phoenix Phearsome Phour Challenge, its organizer, and anyone associated with it accept zero responsibility for what happens during your El Cuatro attempt. That includes every category of outdoor misadventure the desert is capable of delivering across a sixteen-summit day, plus any spiritual or philosophical developments that occur somewhere around summit twelve when you are on your fourth lap of Piestewa and the question of why you are doing this stops being rhetorical.</p>
+    <p>You have been warned. With full seriousness. Once, because we ran out of clever ways to say it and started respecting the attempt.</p>
+    <p style="margin-bottom:0; margin-top:1.2rem; font-family:'Courier New', monospace; font-size:0.75rem; color:var(--gold); letter-spacing:0.1em;">Pre-dawn. Double nutrition. Full schedule on paper. The record is open. Go get it.</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- ROUTE RULES -->
+<section>
+  <p class="section-label">Route Rules</p>
+  <h2>What Makes It Official</h2>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num">01</span>
+      <span>Summit all four peaks four times each, all on the same calendar day. Echo Canyon opens at 5am, setting the earliest valid start. Piestewa Peak officially closes at 11pm.</span>
+    </li>
+    <li>
+      <span class="rule-num">02</span>
+      <span>Peak order is your choice. All four summits of each peak must be completed on the same calendar day. No splitting a peak's quad summit across calendar days.</span>
+    </li>
+    <li>
+      <span class="rule-num">03</span>
+      <span>Camelback Mountain: four summits completed as two full yo-yos. Start from either Echo Canyon or Cholla Trailhead. Each yo-yo traverses the summit twice. All four summit hits must fall within the sunrise-to-sunset access window.</span>
+    </li>
+    <li>
+      <span class="rule-num">04</span>
+      <span>Piestewa Peak: four summits completed as two full loops. Each loop follows the upside-down Y pattern: east-side trailhead up to the summit, down the 302 switchbacks on the west side, back up to the summit via the east side, back down to the trailhead. Both loops must follow this structure. No shortcuts between the east and west trail segments.</span>
+    </li>
+    <li>
+      <span class="rule-num">05</span>
+      <span>Document your attempt with a continuous GPS recording showing all sixteen summit hits with timestamps on the same calendar day. This recording is your official record. It is the document that establishes your completion. Protect it. All sixteen summits must appear in a single continuous recording with verifiable GPS data.</span>
+    </li>
+    <li>
+      <span class="rule-num">06</span>
+      <span>No pacers. No external pacing or on-trail support of any kind. Transportation between trailheads is permitted. Self-carry or public water sources only for on-trail hydration and nutrition.</span>
+    </li>
+    <li>
+      <span class="rule-num">07</span>
+      <span>All trail access hours must be respected. A summit that occurs outside posted access hours does not count. There are no exceptions for this rule at El Cuatro.</span>
+    </li>
+    <li>
+      <span class="rule-num">08</span>
+      <span>To be added to the Wall of Fame, complete all three steps: submit your attempt using the official form at phoenixphearsomephour.com, provide a link to your public Strava activity showing all sixteen summit hits, and post it to the Phoenix Phearsome Phour Facebook group at facebook.com/groups/phoenixphearsomephour. All three are required for official recognition.</span>
+    </li>
+  </ul>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- BADGE -->
+<section>
+  <p class="section-label">The Reward</p>
+  <h2>El Cuatro Badge</h2>
+  <p>Sixteen summit hits, all completed on the same calendar day. To claim your El Cuatro badge and be added to the Wall of Fame, complete all three steps: submit your attempt using the official form at phoenixphearsomephour.com, provide a link to your public Strava activity, and post it to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color:var(--gold);">facebook.com/groups/phoenixphearsomephour</a>. All three are required. The El Cuatro badge is the highest tier recognition in the Phoenix Phearsome Phour Challenge. Five individuals are known to have completed the quad-summit concept before the official challenge existed. The badge is waiting for the first person to complete the officially documented route and submit their record.</p>
+
+  <div class="badge-block">
+    <div class="badge-swatch">
+      <div class="swatch-a"></div>
+      <div class="swatch-b"></div>
+    </div>
+    <div class="badge-info">
+      <h3>El Cuatro</h3>
+      <p class="badge-meta">Tier 4 &bull; Near Black + Gold &bull; Sixteen Summits &bull; Record Open</p>
+      <p>The El Cuatro badge runs in near black and gold. The darkest tier badge in the system, with the gold of the challenge crest at its base. Five people are known to have done this before the official challenge existed. The badge is waiting for the first official completion under the documented route definition.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WALL OF FAME -->
+<section>
+  <p class="section-label">Wall of Fame</p>
+  <h2>You Did It.</h2>
+  <p>If you are reading this after completing El Cuatro under the official challenge definition, this section is for you. Sixteen summits. Same calendar day. All four peaks. You did what five people before you did, and you did it on the record.</p>
+
+  <div style="border: 1px solid rgba(201,150,42,0.4); background: rgba(201,150,42,0.05); padding: 2.5rem; margin-top: 2rem;">
+    <p class="section-label" style="margin-bottom: 1.5rem;">Claim Your Spot</p>
+    <p style="color: var(--bone); font-size: 1.05rem; margin-bottom: 1.5rem;">Three steps to make it official and earn your place on the El Cuatro Wall of Fame.</p>
+
+    <ul class="rules-list" style="margin-top: 0;">
+      <li>
+        <span class="rule-num" style="color: var(--gold);">01</span>
+        <span>Submit your attempt using the official form on this site. Include your name, date of completion, and a link to your public Strava activity showing all sixteen summit hits.</span>
+      </li>
+      <li>
+        <span class="rule-num" style="color: var(--gold);">02</span>
+        <span>Make sure your Strava activity is set to public before you submit. That recording is the official documentation of your completion. It needs to be visible to be verified.</span>
+      </li>
+      <li>
+        <span class="rule-num" style="color: var(--gold);">03</span>
+        <span>Post your completion to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color: var(--gold);">facebook.com/groups/phoenixphearsomephour</a>. The community wants to know. Tell them.</span>
+      </li>
+    </ul>
+
+    <p style="margin-top: 2rem; margin-bottom: 0; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em;">All three steps required. Complete them all and your name goes on the wall.</p>
+  </div>
+</section>
+
+
+<section>
+  <p class="section-label">The Full Picture</p>
+  <h2>El Cuatro Is the Ceiling of the Tier System</h2>
+  <p>Above El Cuatro is the Phoenix Phearsome Phour 70K. The ultra route. Forty-four miles, eight summit hits across all four peaks in a continuous out-and-back. It is a different category of challenge entirely. It is not a tier. It is the route that exists for people who finished the tier system and asked what else the desert had.</p>
+  <p>The 70K Ultra route documentation, the official GPX file, and the full challenge record are at phoenixphearsomephour.com. If you are standing here, at the end of the El Cuatro page, reading this sentence, you probably already know that.</p>
+</section>
+
+<footer>
+  &copy; Phoenix Phearsome Phour Challenge &bull; Matthew Hinman &bull; phoenixphearsomephour.com
+</footer>
+
+</body>
+</html>
