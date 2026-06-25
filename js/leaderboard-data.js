@@ -2,12 +2,12 @@
 // tierKey must be one of: uno-fresco, dos-caliente, tres-locos, el-cuatro, ultra-70k
 // Example: { name: "Jane Doe", tierKey: "el-cuatro", peaks: 16, date: "2026-05-01", time: "18:42" }
 const leaderboardEntries = [
-  { name: "Lorem Ipsum", tierKey: "uno-fresco", peaks: 4, date: "2026-01-12", time: "9:42" },
-  { name: "Dolor Sit", tierKey: "dos-caliente", peaks: 8, date: "2026-01-19", time: "14:08" },
-  { name: "Amet Consectetur", tierKey: "tres-locos", peaks: 12, date: "2026-02-02", time: "16:55" },
+  { name: "Lorem Ipsum", tierKey: "uno-fresco", peaks: 4, date: "2026-01-12", time: "17:42" },
+  { name: "Dolor Sit", tierKey: "dos-caliente", peaks: 8, date: "2026-01-19", time: "18:08" },
+  { name: "Amet Consectetur", tierKey: "tres-locos", peaks: 12, date: "2026-02-02", time: "20:55" },
   { name: "Adipiscing Elit", tierKey: "el-cuatro", peaks: 16, date: "2026-02-14", time: "17:30" },
   { name: "Sed Do Eiusmod", tierKey: "ultra-70k", peaks: 8, date: "2026-02-21", time: "19:47" },
-  { name: "Tempor Incididunt", tierKey: "uno-fresco", peaks: 4, date: "2026-03-01", time: "10:15" },
+  { name: "Tempor Incididunt", tierKey: "uno-fresco", peaks: 4, date: "2026-03-01", time: "21:15" },
 ];
 
 const leaderboardTiers = [
