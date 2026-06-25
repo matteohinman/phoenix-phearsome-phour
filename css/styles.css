@@ -334,6 +334,55 @@ table.leaderboard th {
   margin-top: 1.5rem;
 }
 
+.lb-badge {
+  display: flex;
+  flex-direction: column;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.lb-badge .swatch-a {
+  height: 60%;
+}
+
+.lb-badge .swatch-b {
+  height: 40%;
+}
+
+.lb-badge.uno-fresco .swatch-a {
+  background: #c8dde8;
+}
+.lb-badge.uno-fresco .swatch-b {
+  background: #4a7fa5;
+}
+
+.lb-badge.dos-caliente .swatch-a {
+  background: #c45e3a;
+}
+.lb-badge.dos-caliente .swatch-b {
+  background: #e07a3a;
+}
+
+.lb-badge.tres-locos .swatch-a {
+  background: #8b2e2e;
+}
+.lb-badge.tres-locos .swatch-b {
+  background: #2a2a2a;
+}
+
+.lb-badge.el-cuatro .swatch-a {
+  background: #141414;
+}
+.lb-badge.el-cuatro .swatch-b {
+  background: #c9962a;
+}
+
+.lb-badge.ultra-70k {
+  background: linear-gradient(135deg, #c8dde8, #c45e3a, #8b2e2e, #141414, #c9962a);
+}
+
 .placeholder {
   color: var(--muted);
   font-style: italic;
