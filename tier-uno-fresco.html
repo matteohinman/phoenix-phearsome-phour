@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uno Fresco | Phoenix Phearsome Phour Challenge</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root {
+    --black:      #0f0f0f;
+    --charcoal:   #1c1c1c;
+    --gold:       #c9962a;
+    --gold-dim:   #9a6f1a;
+    --bone:       #e8dfc8;
+    --dust:       #b0a48a;
+    --terracotta: #c45e3a;
+    --sky:        #4a7fa5;
+    --white:      #f5f0e8;
+    --tier-a:     #c8dde8;
+    --tier-b:     #4a7fa5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--bone);
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 80%, #001a24 0%, var(--black) 65%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(74,127,165,0.04) 3px,
+      rgba(74,127,165,0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title .accent {
+    color: var(--sky);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 0.2em;
+    color: var(--dust);
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .tier-badge-hero {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--sky);
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat { text-align: center; }
+
+  .hero-stat .num {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--sky);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat .label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .divider {
+    width: 1px;
+    background: rgba(74,127,165,0.4);
+    opacity: 0.6;
+    align-self: stretch;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+    opacity: 0.3;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--dust);
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    max-width: 65ch;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: rgba(74,127,165,0.2);
+    border: 1px solid rgba(74,127,165,0.2);
+    margin-top: 2.5rem;
+  }
+
+  .overview-cell {
+    background: var(--charcoal);
+    padding: 1.5rem;
+  }
+
+  .overview-cell .val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--sky);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .overview-cell .key {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .peaks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .peak-card {
+    border: 1px solid rgba(74,127,165,0.25);
+    padding: 2rem;
+    background: var(--charcoal);
+  }
+
+  .peak-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+
+  .peak-card .peak-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 1rem;
+  }
+
+  .peak-card p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .waypoints {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .waypoints thead tr { border-bottom: 1px solid rgba(74,127,165,0.3); }
+
+  .waypoints th {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sky);
+    text-align: left;
+    padding: 0.5rem 0.75rem 0.75rem;
+    font-weight: 400;
+  }
+
+  .waypoints td {
+    padding: 0.85rem 0.75rem;
+    color: var(--bone);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  .waypoints tr:hover td { background: rgba(74,127,165,0.05); }
+  .waypoints .milestone { font-weight: 700; color: var(--white); }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+  }
+
+  .tag-summit { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-valley { background: rgba(74,127,165,0.2); color: var(--sky); }
+  .tag-start  { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-turn   { background: rgba(255,255,255,0.08); color: var(--dust); }
+
+  .rules-list { list-style: none; margin-top: 1.5rem; }
+
+  .rules-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--dust);
+    font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .rules-list li .rule-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: var(--sky);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+    width: 2rem;
+  }
+
+  .badge-block {
+    background: var(--charcoal);
+    border: 1px solid rgba(74,127,165,0.3);
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .badge-swatch {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border: 1px solid rgba(74,127,165,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge-swatch .swatch-a { width: 100%; height: 60%; background: #c8dde8; border-bottom: 1px solid rgba(74,127,165,0.2); }
+  .badge-swatch .swatch-b { width: 100%; height: 40%; background: var(--sky); }
+
+  .badge-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+
+  .badge-info .badge-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 0.8rem;
+  }
+
+  .badge-info p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .full-rule { width: 100%; height: 1px; background: rgba(201,150,42,0.12); }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(74,127,165,0.2);
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .back-link {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-decoration: none;
+    z-index: 1;
+  }
+
+  .back-link:hover { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .peaks-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .divider { display: none; }
+    .badge-block { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <a class="back-link" href="tiers.html">&larr; Phoenix Phearsome Phour</a>
+  <p class="eyebrow">Phoenix Mountain Preserve &bull; Tiered Summit Challenge &bull; The Entry Point</p>
+  <span class="tier-badge-hero">Tier 1 of 4</span>
+  <h1 class="hero-title">
+    Uno
+    <span class="accent">Fresco</span>
+  </h1>
+  <p class="hero-subtitle">Four Peaks &bull; One Summit Each &bull; 5am to 11pm &bull; Welcome to the Desert</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Peaks</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Total Summits</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">5am–11pm</span>
+      <span class="label">Access Window</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">1</span>
+      <span class="label">Tier</span>
+    </div>
+  </div>
+
+  <p class="scroll-cue">&#9660; Challenge Details Below</p>
+</div>
+
+<div class="full-rule"></div>
+
+<!-- OVERVIEW -->
+<section>
+  <p class="section-label">What It Is</p>
+  <h2>Four Peaks. One Summit Each. All on the Same Day.</h2>
+  <p>Uno Fresco is the entry tier of the Phoenix Phearsome Phour Challenge. Four peaks in the Phoenix Mountain Preserve, one summit per peak, all on the same calendar day. That is the whole requirement. It sounds clean. The desert will provide texture.</p>
+  <p>Camelback Mountain. Piestewa Peak. North Mountain. Shaw Butte. In any order you choose. On foot. Without shade anywhere on any of them. If you have done one of these peaks before, you know what the terrain is. If you have done all four in a single day, you know what Uno Fresco is. If you have not done all four in a single day, this page is where you find out what you signed up for.</p>
+  <p>Uno Fresco is Tier 1. This is the first step. It is not a small one. Respect the access hours, carry more water than seems necessary, and read the warnings section before you go.</p>
+
+  <div class="overview-grid">
+    <div class="overview-cell">
+      <div class="val">4</div>
+      <div class="key">Peaks Required</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">1x</div>
+      <div class="key">Summit Per Peak</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">4</div>
+      <div class="key">Total Summits</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">5am</div>
+      <div class="key">Earliest Start</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">11pm</div>
+      <div class="key">Latest Finish</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- THE FOUR PEAKS -->
+<section>
+  <p class="section-label">The Peaks</p>
+  <h2>Four Mountains. One Summit Each.</h2>
+  <p>Each peak requires one confirmed summit hit, completed on the same calendar day. Peak order is your choice. Plan your sequence around the access constraints, particularly Camelback's sunrise-to-sunset window and the heat advisory closures at Camelback and Piestewa. There is no prescribed order. There is a real consequence for showing up at a trailhead after it closes.</p>
+
+  <div class="peaks-grid">
+    <div class="peak-card">
+      <h3>Camelback Mountain</h3>
+      <p class="peak-meta">2,706 ft &bull; One summit required</p>
+      <p>One summit required, up and down. Start from either Echo Canyon or Cholla Trailhead. Echo Canyon opens at 5am and allows you to be moving at first light. Cholla opens at sunrise. The entire mountain closes at sunset with no exceptions. Plan your timing so the summit and descent are completed before that window closes. The summit scramble on Echo Canyon requires hands and feet. It demands attention on the way down, not just the way up.</p>
+    </div>
+    <div class="peak-card">
+      <h3>Piestewa Peak</h3>
+      <p class="peak-meta">2,610 ft &bull; One summit required</p>
+      <p>One summit required. Up from the main east-side trailhead to the summit, then back down the same way. The trail is well-worn and popular. That does not make it easy. The upper section is sustained and rocky, and the descent requires attention through fatigue. Piestewa closes during heat advisories from 8am to 5pm. The trailhead closes at 11pm. Plan accordingly. One summit, east-side approach, confirm the top.</p>
+    </div>
+    <div class="peak-card">
+      <h3>North Mountain</h3>
+      <p class="peak-meta">1,919 ft &bull; One summit required</p>
+      <p>One summit required, up and down. Start from either the north road end or the Quechan Area 7 ramada side. The trail is direct and the elevation gain is the most modest of the four peaks. It is not a throwaway. Cumulative fatigue from the day makes every ascent harder than it looks on paper. Summit confirmed, not the ridge below it.</p>
+    </div>
+    <div class="peak-card">
+      <h3>Shaw Butte</h3>
+      <p class="peak-meta">2,149 ft &bull; One summit required</p>
+      <p>One summit required. One approach from the parking lot, one way up, one way down. The trail is consistent and the route is unambiguous. The communication tower is a visible landmark near the top. Confirm the summit, not the saddle below the tower. Shaw Butte tends to be quieter than Camelback and Piestewa. Do not mistake quiet for easy. The desert does not grade on attendance.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- SEQUENCE TABLE -->
+<section>
+  <p class="section-label">Summit Requirements</p>
+  <h2>Four Summit Hits Required</h2>
+  <p>One summit per peak. The table below documents the requirement and access constraints for each peak. No prescribed order. Plan your sequence around the access windows and heat advisory hours before you leave the car.</p>
+
+  <table class="waypoints">
+    <thead>
+      <tr>
+        <th>Peak</th>
+        <th>Summit Elevation</th>
+        <th>Summit Requirement</th>
+        <th>Access Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="milestone">Camelback Mountain <span class="tag tag-summit">x1</span></td>
+        <td>2,706 ft</td>
+        <td>One summit. Up and down from Echo Canyon or Cholla. Summit confirmed, not the false summit on the Echo Canyon approach. Descent complete before sunset.</td>
+        <td>Opens 5am, closes at sunset. No exceptions. Heat advisory closure 8am to 5pm.</td>
+      </tr>
+      <tr>
+        <td class="milestone">Piestewa Peak <span class="tag tag-summit">x1</span></td>
+        <td>2,610 ft</td>
+        <td>One summit. Up from east-side trailhead, back down the same way. Confirm the top.</td>
+        <td>Opens 5am, closes 11pm. Heat advisory closure 8am to 5pm.</td>
+      </tr>
+      <tr>
+        <td class="milestone">North Mountain <span class="tag tag-summit">x1</span></td>
+        <td>1,919 ft</td>
+        <td>One summit. Up and down from north road end or Quechan Area 7 ramada side. Confirm summit, not the ridge.</td>
+        <td>Opens at sunrise. Parking lot closes at sunset.</td>
+      </tr>
+      <tr>
+        <td class="milestone">Shaw Butte <span class="tag tag-summit">x1</span></td>
+        <td>2,149 ft</td>
+        <td>One summit. Direct approach from parking lot. Confirm the summit, not the saddle below the communication tower.</td>
+        <td>Opens at sunrise. Parking lot closes at sunset.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WARNINGS -->
+<section>
+  <p class="section-label">Before You Go</p>
+  <h2>Four Peaks. No Shade. Read This.</h2>
+  <p>Uno Fresco is Tier 1. That does not mean it is casual. The Phoenix Mountain Preserve does not offer shade anywhere on any of the four peaks, on any approach, at any time of day. This section is a briefing. Read it before you go, not after something goes wrong.</p>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Heat and sun exposure.</strong> There is no shade on Camelback, Piestewa, North Mountain, or Shaw Butte. Not on the trails, not at the summits, not in the approach corridors between them. You will be in full sun for the majority of the day. Ground temperatures on exposed rock in the Phoenix desert are not moderate even in the cool season. Carry more water than seems necessary. The number you are thinking of right now is not enough.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">October through April. Not summer. Not ever.</strong> Uno Fresco is a cool-season challenge. The Phoenix desert in summer is not a backdrop for outdoor activity. It is an environment in which people die on these trails doing far less than four peaks in a day. Do not use the tier system as a reason to expand the season. October through April. That is the window.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Trail access hours.</strong> Camelback and Piestewa open at 5am. North Mountain and Shaw Butte open at sunrise. Camelback closes at sunset, no exceptions, and its parking lots at North Mountain and Shaw Butte also close at sunset. Piestewa is the only peak with access until 11pm. Camelback and Piestewa both close during heat advisories from 8am to 5pm. A summit that occurs outside posted access hours does not count. Know the hours for every peak before you leave the car.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Cumulative fatigue.</strong> Four peaks is four peaks. The second peak is harder than the first. The fourth peak is harder than the third. This compounds across the day in ways that are difficult to fully anticipate if you have not done it before. Fatigue affects foot placement, decision-making, and your ability to accurately assess how you are doing. Build in more time than your best-case estimate.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Rocks and technical terrain.</strong> Camelback's summit scramble on the Echo Canyon route requires hands and feet. The descent is where most injuries happen, not the ascent. Piestewa's upper section is rocky and sustained. Pay full attention on every descent, not just the first one.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Cactus.</strong> The Phoenix Mountain Preserve is a working desert. Jumping cholla, prickly pear, and saguaro are present on every peak and every approach. The cholla does not care that this is your first tier. Bring tweezers. They will be used. This is not a precaution. It is a prediction.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Wildlife.</strong> Rattlesnakes, scorpions, Gila monsters, javelinas, black widows, bobcats, and chupacabras are present throughout the preserve. The chupacabra sightings are unconfirmed, but we are not ruling anything out. Watch where you step and where you put your hands. This applies especially on the descent when fatigue is highest and attention tends to drift.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--sky);">&#9650;</span>
+      <span><strong style="color:var(--white);">Water.</strong> Carry it. All of it. On-trail water sources in the Phoenix Mountain Preserve are not reliable. There are no aid stations. No one is handing you anything. Your hydration is entirely self-managed from the moment you start to the moment you finish. Plan for the full day and carry a margin beyond that plan.</span>
+    </li>
+  </ul>
+
+  <div style="margin-top:3rem; border:1px solid rgba(196,94,58,0.5); background:rgba(196,94,58,0.07); padding:2rem;">
+    <p class="section-label" style="margin-bottom:1rem; color:var(--terracotta);">Official Stance of the Phoenix Phearsome Phour Challenge</p>
+    <p style="color:var(--bone); font-size:1.05rem; margin-bottom:1rem;">We strongly encourage you not to attempt this challenge.</p>
+    <p>Uno Fresco is Tier 1. One summit per peak. All four peaks. Same calendar day. It is the entry point to the tier system, which means it is the most accessible version of a challenge that goes up to sixteen summits in a day at the top. We want to be clear: accessible does not mean easy. It means the bar is here instead of considerably higher up.</p>
+    <p>The Phoenix Mountain Preserve is a desert. The trails are real. The sun is real. The cumulative mileage and elevation gain of four peaks in a single day is real. If you do not regularly hike or trail run these peaks, Uno Fresco will be a significant effort. If you do regularly hike or trail run them, Uno Fresco will remind you that four in a day is different from one at a time.</p>
+    <p>The Phoenix Phearsome Phour Challenge, its organizer, and anyone associated with it accept zero responsibility for what happens on your Uno Fresco attempt. That includes heat, cactus, wildlife, technical terrain, access-hour violations, poor footwear choices, insufficient water, the feeling somewhere on your fourth peak that you have made a decision you are no longer confident about, and any philosophical developments that occur on the descent of Shaw Butte when you realize what tiers two through four must feel like.</p>
+    <p style="margin-bottom:0; margin-top:1.2rem; font-family:'Courier New', monospace; font-size:0.75rem; color:var(--sky); letter-spacing:0.1em;">Cool season only. Water for the full day. You have been warned with full seriousness and one small smile. Go get it.</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- ROUTE RULES -->
+<section>
+  <p class="section-label">Route Rules</p>
+  <h2>What Makes It Official</h2>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num">01</span>
+      <span>Summit all four peaks once each, all on the same calendar day. Plan all four summits within the access window for each peak.</span>
+    </li>
+    <li>
+      <span class="rule-num">02</span>
+      <span>Peak order is your choice. All four summits must be completed on the same calendar day. No splitting peaks across calendar days.</span>
+    </li>
+    <li>
+      <span class="rule-num">03</span>
+      <span>Camelback Mountain: one summit, up and down. Start from Echo Canyon or Cholla Trailhead. Confirm the true summit, not the false summit on the Echo Canyon approach. Opens 5am, closes at sunset. No exceptions. Descent complete before sunset.</span>
+    </li>
+    <li>
+      <span class="rule-num">04</span>
+      <span>Piestewa Peak: one summit. Up from the east-side trailhead to the summit, back down the same way. Opens 5am, closes 11pm. Heat advisory closure 8am to 5pm. Plan your timing around these windows.</span>
+    </li>
+    <li>
+      <span class="rule-num">05</span>
+      <span>North Mountain: one summit, up and down. Start from either the north road end or the Quechan Area 7 ramada side. Opens at sunrise. Parking lot closes at sunset. Confirm the summit, not the ridge below it.</span>
+    </li>
+    <li>
+      <span class="rule-num">06</span>
+      <span>Shaw Butte: one summit. Direct approach from the parking lot. Opens at sunrise. Parking lot closes at sunset. Confirm the true summit, not the saddle below the communication tower.</span>
+    </li>
+    <li>
+      <span class="rule-num">07</span>
+      <span>Document your attempt with a GPS recording showing all four summit hits with timestamps on the same calendar day. A public Strava activity is the standard. That recording is your official documentation of completion.</span>
+    </li>
+    <li>
+      <span class="rule-num">08</span>
+      <span>No pacers. No external pacing or on-trail support of any kind. Transportation between trailheads is permitted. Self-carry or public water sources only for on-trail hydration and nutrition.</span>
+    </li>
+    <li>
+      <span class="rule-num">09</span>
+      <span>All trail access hours must be respected. A summit that occurs outside posted access hours does not count. There are no exceptions.</span>
+    </li>
+    <li>
+      <span class="rule-num">10</span>
+      <span>To be added to the Wall of Fame, complete all three steps: submit your attempt using the official form at phoenixphearsomephour.com, provide a link to your public Strava activity showing all four summit hits, and post it to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color:var(--sky);">facebook.com/groups/phoenixphearsomephour</a>. All three are required for official recognition.</span>
+    </li>
+  </ul>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- BADGE -->
+<section>
+  <p class="section-label">The Reward</p>
+  <h2>Uno Fresco Badge</h2>
+  <p>Four summit hits, all completed on the same calendar day. To claim your Uno Fresco badge and be added to the Wall of Fame, complete all three steps: submit your attempt using the official form at phoenixphearsomephour.com, provide a link to your public Strava activity showing all four summit hits, and post it to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color:var(--sky);">facebook.com/groups/phoenixphearsomephour</a>. All three are required.</p>
+
+  <div class="badge-block">
+    <div class="badge-swatch">
+      <div class="swatch-a"></div>
+      <div class="swatch-b"></div>
+    </div>
+    <div class="badge-info">
+      <h3>Uno Fresco</h3>
+      <p class="badge-meta">Tier 1 &bull; Bone/Sand + Sky Blue &bull; Four Summits &bull; The Entry Point</p>
+      <p>The Uno Fresco badge runs in bone and sky blue. The lightest palette in the tier system, for the tier where it starts. Four peaks, one summit each. The desert will feel it regardless of how the badge looks. Submit your completion and earn it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WALL OF FAME -->
+<section>
+  <p class="section-label">Wall of Fame</p>
+  <h2>You Did It.</h2>
+  <p>If you are reading this after completing Uno Fresco, this section is for you. Four peaks. Four summits. Same calendar day. You have done what most people who drive past these mountains every day will not do. That is worth noting.</p>
+
+  <div style="border: 1px solid rgba(74,127,165,0.4); background: rgba(74,127,165,0.05); padding: 2.5rem; margin-top: 2rem;">
+    <p class="section-label" style="margin-bottom: 1.5rem;">Claim Your Spot</p>
+    <p style="color: var(--bone); font-size: 1.05rem; margin-bottom: 1.5rem;">Three steps to make it official and earn your place on the Uno Fresco Wall of Fame.</p>
+
+    <ul class="rules-list" style="margin-top: 0;">
+      <li>
+        <span class="rule-num" style="color: var(--sky);">01</span>
+        <span>Submit your attempt using the official form on this site. Include your name, date of completion, and a link to your public Strava activity showing all four summit hits.</span>
+      </li>
+      <li>
+        <span class="rule-num" style="color: var(--sky);">02</span>
+        <span>Make sure your Strava activity is set to public before you submit. That recording is the official documentation of your completion. It needs to be visible to be verified.</span>
+      </li>
+      <li>
+        <span class="rule-num" style="color: var(--sky);">03</span>
+        <span>Post your completion to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color: var(--sky);">facebook.com/groups/phoenixphearsomephour</a>. The community wants to know. Tell them.</span>
+      </li>
+    </ul>
+
+    <p style="margin-top: 2rem; margin-bottom: 0; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--sky); letter-spacing: 0.1em;">All three steps required. Complete them all and your name goes on the wall.</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<section>
+  <p class="section-label">What Comes Next</p>
+  <h2>Uno Fresco Is the Floor, Not the Ceiling</h2>
+  <p>The tier system continues from here. Dos Caliente requires two summits per peak in a single day. Tres Locos requires three. El Cuatro, Tier 4, requires four summits per peak, sixteen total, all on the same calendar day. Above the tier system is the Phoenix Phearsome Phour 70K, a continuous out-and-back ultra hitting all four peaks with eight total summit hits across roughly forty-four miles.</p>
+  <p>Full documentation for each tier and the 70K Ultra route is at phoenixphearsomephour.com. If you are standing here, on the other side of Uno Fresco, the question of what comes next is already forming. That is normal. That is what this challenge does.</p>
+</section>
+
+<footer>
+  &copy; Phoenix Phearsome Phour Challenge &bull; Matthew Hinman &bull; phoenixphearsomephour.com
+</footer>
+
+</body>
+</html>
