@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tres Locos | Phoenix Phearsome Phour Challenge</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root {
+    --black:      #0f0f0f;
+    --charcoal:   #1c1c1c;
+    --gold:       #c9962a;
+    --gold-dim:   #9a6f1a;
+    --bone:       #e8dfc8;
+    --dust:       #b0a48a;
+    --terracotta: #c45e3a;
+    --sky:        #4a7fa5;
+    --white:      #f5f0e8;
+    --tier-a:     #8b2e2e;
+    --tier-b:     #2a2a2a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--bone);
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 80%, #200a0a 0%, var(--black) 65%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(139,46,46,0.04) 3px,
+      rgba(139,46,46,0.04) 4px
+    );
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title .accent {
+    color: var(--tier-a);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 0.2em;
+    color: var(--dust);
+    margin-top: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .tier-badge-hero {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--tier-a);
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat { text-align: center; }
+
+  .hero-stat .num {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--tier-a);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero-stat .label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .divider {
+    width: 1px;
+    background: rgba(139,46,46,0.4);
+    opacity: 0.6;
+    align-self: stretch;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-dim);
+    opacity: 0.3;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    color: var(--dust);
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+    max-width: 65ch;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: rgba(139,46,46,0.2);
+    border: 1px solid rgba(139,46,46,0.2);
+    margin-top: 2.5rem;
+  }
+
+  .overview-cell {
+    background: var(--charcoal);
+    padding: 1.5rem;
+  }
+
+  .overview-cell .val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--tier-a);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .overview-cell .key {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.4rem;
+  }
+
+  .peaks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .peak-card {
+    border: 1px solid rgba(139,46,46,0.25);
+    padding: 2rem;
+    background: var(--charcoal);
+  }
+
+  .peak-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+
+  .peak-card .peak-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--tier-a);
+    margin-bottom: 1rem;
+  }
+
+  .peak-card p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .waypoints {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .waypoints thead tr { border-bottom: 1px solid rgba(139,46,46,0.3); }
+
+  .waypoints th {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--tier-a);
+    text-align: left;
+    padding: 0.5rem 0.75rem 0.75rem;
+    font-weight: 400;
+  }
+
+  .waypoints td {
+    padding: 0.85rem 0.75rem;
+    color: var(--bone);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+
+  .waypoints tr:hover td { background: rgba(139,46,46,0.05); }
+  .waypoints .milestone { font-weight: 700; color: var(--white); }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.4rem;
+  }
+
+  .tag-summit { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-valley { background: rgba(139,46,46,0.2); color: var(--tier-a); }
+  .tag-start  { background: rgba(201,150,42,0.25); color: var(--gold); }
+  .tag-turn   { background: rgba(255,255,255,0.08); color: var(--dust); }
+
+  .rules-list { list-style: none; margin-top: 1.5rem; }
+
+  .rules-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--dust);
+    font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .rules-list li .rule-num {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    color: var(--tier-a);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+    width: 2rem;
+  }
+
+  .badge-block {
+    background: var(--charcoal);
+    border: 1px solid rgba(139,46,46,0.3);
+    padding: 2.5rem;
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .badge-swatch {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border: 1px solid rgba(139,46,46,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge-swatch .swatch-a { width: 100%; height: 60%; background: #8b2e2e; border-bottom: 1px solid rgba(139,46,46,0.2); }
+  .badge-swatch .swatch-b { width: 100%; height: 40%; background: #2a2a2a; }
+
+  .badge-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+
+  .badge-info .badge-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--tier-a);
+    margin-bottom: 0.8rem;
+  }
+
+  .badge-info p { font-size: 0.9rem; margin-bottom: 0; }
+
+  .full-rule { width: 100%; height: 1px; background: rgba(201,150,42,0.12); }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(139,46,46,0.2);
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .back-link {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-decoration: none;
+    z-index: 1;
+  }
+
+  .back-link:hover { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .peaks-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+    .divider { display: none; }
+    .badge-block { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <a class="back-link" href="tiers.html">&larr; Phoenix Phearsome Phour</a>
+  <p class="eyebrow">Phoenix Mountain Preserve &bull; Tiered Summit Challenge &bull; The Point of No Return</p>
+  <span class="tier-badge-hero">Tier 3 of 4</span>
+  <h1 class="hero-title">
+    Tres
+    <span class="accent">Locos</span>
+  </h1>
+  <p class="hero-subtitle">Four Peaks &bull; Three Summits Each &bull; 5am to 11pm &bull; This Is Where It Gets Serious</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num">4</span>
+      <span class="label">Peaks</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">12</span>
+      <span class="label">Total Summits</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">5am</span>
+      <span class="label">Earliest Start</span>
+    </div>
+    <div class="divider"></div>
+    <div class="hero-stat">
+      <span class="num">11pm</span>
+      <span class="label">Latest Finish</span>
+    </div>
+  </div>
+
+  <p class="scroll-cue">&#9660; Challenge Details Below</p>
+</div>
+
+<div class="full-rule"></div>
+
+<!-- OVERVIEW -->
+<section>
+  <p class="section-label">What It Is</p>
+  <h2>Four Peaks. Three Summits Each. All on the Same Day.</h2>
+  <p>Tres Locos is Tier 3 of the Phoenix Phearsome Phour Challenge. Four peaks in the Phoenix Mountain Preserve, three summits per peak, all on the same calendar day. Twelve total summit hits. This is where the tier system stops being theoretical and starts being a full-day physical problem that demands a real plan.</p>
+  <p>Camelback Mountain. Piestewa Peak. North Mountain. Shaw Butte. Three laps each. The peaks did not get shorter. The sun did not agree to move. The trail does not care that you have already been up it twice. Tres Locos is the second-hardest tier in the system, and you will know it by the second ascent of your first peak.</p>
+  <p>Read every section of this page before you go. Pay particular attention to the access hours. Each peak has its own window. They are not the same. A summit that occurs outside posted access hours does not count.</p>
+
+  <div class="overview-grid">
+    <div class="overview-cell">
+      <div class="val">4</div>
+      <div class="key">Peaks Required</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">3x</div>
+      <div class="key">Summit Per Peak</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">12</div>
+      <div class="key">Total Summits</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">5am</div>
+      <div class="key">Earliest Start</div>
+    </div>
+    <div class="overview-cell">
+      <div class="val">11pm</div>
+      <div class="key">Latest Finish</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- THE FOUR PEAKS -->
+<section>
+  <p class="section-label">The Peaks</p>
+  <h2>Four Mountains. Three Summits Each.</h2>
+  <p>Each peak requires three confirmed summit hits, all completed on the same calendar day. Peak order is your choice. Plan your sequence carefully around the access constraints for each peak. Camelback closes at sunset and opens for staging at 5am. Piestewa is the only peak with access until 11pm. North Mountain and Shaw Butte both open at sunrise and close their parking lots at sunset. These are not the same window. Do not treat them as the same window.</p>
+
+  <div class="peaks-grid">
+    <div class="peak-card">
+      <h3>Camelback Mountain</h3>
+      <p class="peak-meta">2,706 ft &bull; Three summits required</p>
+      <p>Three summits required. One full yoyo, meaning up and over and back from whichever trailhead you start on, plus one additional summit hit up and back down. Participant chooses the starting trailhead. Echo Canyon opens at 5am and allows you to be moving before sunrise. Cholla opens at sunrise. The entire mountain closes at sunset, no exceptions. Camelback also closes during heat advisories from 8am to 5pm. Plan your timing so all three summits and the final descent are completed before the sunset window closes, and account for the possibility of a mid-day heat closure when building your schedule. The summit scramble on the Echo Canyon approach requires hands and feet on every pass. It does not get more casual with repetition.</p>
+    </div>
+    <div class="peak-card">
+      <h3>Piestewa Peak</h3>
+      <p class="peak-meta">2,610 ft &bull; Three summits required</p>
+      <p>Three summits required via a structured Y-trail sequence. Up from the east-side trailhead to the summit and back down, then up again and descending via the 302 connector to the west side, then back up to the summit from the west side and returning down to the east-side trailhead. This is not three identical laps. The route uses Piestewa's Y-shaped trail structure to require distinct approach and descent combinations across all three summit hits. Opens 5am, closes 11pm. Heat advisory closure 8am to 5pm. Plan every segment of this sequence against those windows.</p>
+    </div>
+    <div class="peak-card">
+      <h3>North Mountain</h3>
+      <p class="peak-meta">1,919 ft &bull; Three summits required</p>
+      <p>Three summits required. One full yoyo, up and over and back from whichever end you choose to start, plus one additional summit hit up and back down. Participant chooses the starting point. Opens at sunrise. Parking lot closes at sunset. North Mountain has the most modest elevation gain of the four peaks. By the third summit of the day, modest is a relative term. Confirm the summit on every pass, not the ridge below it.</p>
+    </div>
+    <div class="peak-card">
+      <h3>Shaw Butte</h3>
+      <p class="peak-meta">2,149 ft &bull; Three summits required</p>
+      <p>Three summits required. Three times up and down from the parking lot approach. The route is unambiguous and the terrain is consistent. Confirm the true summit on every pass, not the saddle below the communication tower. Opens at sunrise. Parking lot closes at sunset. Shaw Butte tends to be quieter than the other three peaks. By the third summit it will not feel quiet. The desert does not grade on attendance, and it does not grade on lap number either.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- SUMMIT REQUIREMENTS TABLE -->
+<section>
+  <p class="section-label">Summit Requirements</p>
+  <h2>Twelve Summit Hits Required</h2>
+  <p>Three summits per peak. The table below documents the requirement and access constraints for each peak individually. No prescribed order. Plan your sequence around the access windows and heat advisory hours before you leave the car. Each peak's hours are listed separately because they are not the same.</p>
+
+  <table class="waypoints">
+    <thead>
+      <tr>
+        <th>Peak</th>
+        <th>Summit Elevation</th>
+        <th>Summit Requirement</th>
+        <th>Access Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="milestone">Camelback Mountain <span class="tag tag-summit">x3</span></td>
+        <td>2,706 ft</td>
+        <td>Three summits. One full yoyo from participant's chosen trailhead, plus one additional summit up and back down. Either trailhead is permitted. Summit confirmed on every pass, not the false summit on the Echo Canyon approach. All three summits and final descent completed before sunset.</td>
+        <td>Opens 5am. Echo Canyon allows staging before sunrise. Cholla opens at sunrise. Closes at sunset. No exceptions. Heat advisory closure 8am to 5pm.</td>
+      </tr>
+      <tr>
+        <td class="milestone">Piestewa Peak <span class="tag tag-summit">x3</span></td>
+        <td>2,610 ft</td>
+        <td>Three summits via Y-trail sequence. Up from east-side trailhead to summit and back down. Then up again and descending via the 302 connector to the west side. Then back up to the summit from the west side and returning down to the east-side trailhead. Confirm the summit on all three passes.</td>
+        <td>Opens 5am. Closes 11pm. Heat advisory closure 8am to 5pm.</td>
+      </tr>
+      <tr>
+        <td class="milestone">North Mountain <span class="tag tag-summit">x3</span></td>
+        <td>1,919 ft</td>
+        <td>Three summits. One full yoyo from participant's chosen starting point, plus one additional summit up and back down. Confirm the summit on every pass, not the ridge below it.</td>
+        <td>Opens at sunrise. Parking lot closes at sunset.</td>
+      </tr>
+      <tr>
+        <td class="milestone">Shaw Butte <span class="tag tag-summit">x3</span></td>
+        <td>2,149 ft</td>
+        <td>Three summits. Three times up and down from the parking lot approach. Confirm the true summit on every pass, not the saddle below the communication tower.</td>
+        <td>Opens at sunrise. Parking lot closes at sunset.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WARNINGS -->
+<section>
+  <p class="section-label">Before You Go</p>
+  <h2>Four Peaks. No Shade. Twelve Summits. Read This.</h2>
+  <p>Tres Locos is Tier 3. That means you have presumably completed Tiers 1 and 2, or you are attempting this without that foundation, which is its own decision. Either way, this section applies. The Phoenix Mountain Preserve does not offer shade anywhere on any of the four peaks, on any approach, at any time of day. By summit nine, ten, eleven, twelve, this will not be a detail. It will be the whole environment.</p>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Heat and sun exposure.</strong> There is no shade on Camelback, Piestewa, North Mountain, or Shaw Butte. Not on the trails, not at the summits, not in the approach corridors between them. At Tres Locos volume, you will be in full sun across multiple ascents on multiple peaks over the course of a full day. Ground temperatures on exposed rock in the Phoenix desert compound across repeated exposure in ways that do not scale linearly. Carry significantly more water than seems necessary. The number you are thinking of right now is not enough for twelve summits.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">October through April. Not summer. Not ever.</strong> Tres Locos is a cool-season challenge. The Phoenix desert in summer is not a backdrop for outdoor activity. It is an environment in which people die on these trails doing far less than twelve summits in a day. The tier system does not expand the season. October through April. That is the window. There are no exceptions at any tier level.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Trail access hours.</strong> Camelback opens at 5am and closes at sunset, no exceptions. Echo Canyon allows staging before sunrise. Cholla opens at sunrise. Piestewa opens at 5am and closes at 11pm. North Mountain opens at sunrise, parking lot closes at sunset. Shaw Butte opens at sunrise, parking lot closes at sunset. These are four different windows. At Tres Locos volume, with three laps on each peak, mistiming one peak's window does not just cost you a summit. It potentially unravels the sequence planning for your entire day. Know the hours for every peak before you leave the car, and build your schedule around the tightest constraint, which is Camelback.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Cumulative fatigue.</strong> Tres Locos is twelve summits. The second ascent of Camelback is harder than the first. The third ascent of North Mountain is harder than the second. By the time you reach your final peak, cumulative fatigue affects foot placement, decision-making, hydration judgment, and your ability to accurately assess how you are doing. The peaks that feel manageable in the first half of the day will feel different in the second half. Plan for that shift explicitly, not as an afterthought.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Rocks and technical terrain.</strong> Camelback's summit scramble on the Echo Canyon route requires hands and feet. At Tres Locos, you will navigate it multiple times. The descent is where most injuries happen, not the ascent, and that remains true on the second and third pass when attention and energy are depleted. Piestewa's upper section is rocky and sustained across every lap. Technical terrain does not get easier as the day goes on. It gets more consequential.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Cactus.</strong> The Phoenix Mountain Preserve is a working desert. Jumping cholla, prickly pear, and saguaro are present on every peak and every approach. By the third lap on any given peak, trail familiarity does not reduce the risk. It tends to reduce the attention paid to it. Bring tweezers. At Tres Locos volume, bring more than one pair. This is not a precaution. It is operational planning.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Wildlife.</strong> Rattlesnakes, scorpions, Gila monsters, javelinas, black widows, bobcats, and chupacabras are present throughout the preserve. The chupacabra sightings remain unconfirmed, but we are still not ruling anything out. Watch where you step and where you put your hands. This applies especially on descent, when fatigue is highest and attention tends to drift. At twelve summits, you will have many descents. Stay present on all of them.</span>
+    </li>
+    <li>
+      <span class="rule-num" style="color:var(--tier-a);">&#9650;</span>
+      <span><strong style="color:var(--white);">Water.</strong> Carry it. All of it. On-trail water sources in the Phoenix Mountain Preserve are not reliable. There are no aid stations. No one is handing you anything. At Tres Locos volume, hydration is a logistics problem that requires advance planning, not an afterthought managed on the fly. Plan for the full day, account for the extended duration of twelve summits versus four, and carry a margin beyond that plan. Running low on water at summit seven is a different situation than running low at summit three. It is worse in every way.</span>
+    </li>
+  </ul>
+
+  <div style="margin-top:3rem; border:1px solid rgba(139,46,46,0.5); background:rgba(139,46,46,0.07); padding:2rem;">
+    <p class="section-label" style="margin-bottom:1rem; color:var(--tier-a);">Official Stance of the Phoenix Phearsome Phour Challenge</p>
+    <p style="color:var(--bone); font-size:1.05rem; margin-bottom:1rem;">We strongly encourage you not to attempt this challenge.</p>
+    <p>Tres Locos is Tier 3. Three summits per peak. Twelve total. All on the same calendar day. This is not the entry point. It is the second hardest tier in a system that tops out at El Cuatro, sixteen summits, and then the 70K Ultra above that. We want to be direct about where Tres Locos sits in that continuum: it is serious. If you have not completed Tiers 1 and 2, the gap between where you are and where Tres Locos lives is not a suggestion to train more. It is a structural argument for doing this in order.</p>
+    <p>The Phoenix Mountain Preserve is a desert. The trails are real. The sun is real. The cumulative mileage, elevation gain, and time on foot required to complete twelve summits in a single day are real. Tres Locos is the tier where the system stops testing whether you can handle four peaks and starts testing whether you can handle the same terrain repeated under compounding fatigue, sustained heat exposure, and a schedule tight enough that miscalculating one peak's access window has consequences for the rest of the day.</p>
+    <p>The Phoenix Phearsome Phour Challenge, its organizer, and anyone associated with it accept zero responsibility for what happens on your Tres Locos attempt. That includes heat, cactus, wildlife, technical terrain, access-hour violations, insufficient water, the moment somewhere around summit eight when you recalibrate your entire understanding of what felt hard at Tier 1, and any decisions you make in the field that your future self would characterize differently.</p>
+    <p style="margin-bottom:0; margin-top:1.2rem; font-family:'Courier New', monospace; font-size:0.75rem; color:var(--tier-a); letter-spacing:0.1em;">Cool season only. Water for the full day and then more. You have been warned with full seriousness and a desert-dry smile. Go get it.</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- ROUTE RULES -->
+<section>
+  <p class="section-label">Route Rules</p>
+  <h2>What Makes It Official</h2>
+
+  <ul class="rules-list">
+    <li>
+      <span class="rule-num">01</span>
+      <span>Summit all four peaks three times each, all on the same calendar day. Plan all twelve summit hits within the access window for each peak individually. Peak access hours differ by peak. Treat each one separately.</span>
+    </li>
+    <li>
+      <span class="rule-num">02</span>
+      <span>Peak order is your choice. All twelve summits must be completed on the same calendar day. No splitting peaks across calendar days.</span>
+    </li>
+    <li>
+      <span class="rule-num">03</span>
+      <span>Camelback Mountain: three summits required. One full yoyo from your chosen trailhead, plus one additional summit up and back down. Either trailhead is permitted. Participant chooses the starting point. Confirm the true summit on every pass, not the false summit on the Echo Canyon approach. Descent from the final Camelback summit must be complete before sunset. Opens 5am. Echo Canyon allows staging before sunrise. Cholla opens at sunrise. Closes at sunset. No exceptions. Heat advisory closure 8am to 5pm.</span>
+    </li>
+    <li>
+      <span class="rule-num">04</span>
+      <span>Piestewa Peak: three summits required via Y-trail sequence. Up from the east-side trailhead to the summit and back down. Then up again and descending via the 302 connector to the west side. Then back up to the summit from the west side and returning down to the east-side trailhead. Confirm the summit on all three passes. Opens 5am. Closes 11pm. Heat advisory closure 8am to 5pm.</span>
+    </li>
+    <li>
+      <span class="rule-num">05</span>
+      <span>North Mountain: three summits required. One full yoyo from your chosen starting point, plus one additional summit up and back down. Participant chooses the starting point. Confirm the summit on every pass, not the ridge below it. Opens at sunrise. Parking lot closes at sunset.</span>
+    </li>
+    <li>
+      <span class="rule-num">06</span>
+      <span>Shaw Butte: three summits required. Three times up and down from the parking lot approach. Confirm the true summit on every pass, not the saddle below the communication tower. Opens at sunrise. Parking lot closes at sunset.</span>
+    </li>
+    <li>
+      <span class="rule-num">07</span>
+      <span>Document your attempt with a GPS recording showing all twelve summit hits with timestamps on the same calendar day. A public Strava activity is the standard. That recording is your official documentation of completion.</span>
+    </li>
+    <li>
+      <span class="rule-num">08</span>
+      <span>No pacers. No external pacing or on-trail support of any kind. Transportation between trailheads is permitted. Self-carry or public water sources only for on-trail hydration and nutrition.</span>
+    </li>
+    <li>
+      <span class="rule-num">09</span>
+      <span>All trail access hours must be respected. A summit that occurs outside posted access hours does not count. There are no exceptions.</span>
+    </li>
+    <li>
+      <span class="rule-num">10</span>
+      <span>To be added to the Wall of Fame, complete all three steps: submit your attempt using the official form at phoenixphearsomephour.com, provide a link to your public Strava activity showing all twelve summit hits, and post it to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color:var(--tier-a);">facebook.com/groups/phoenixphearsomephour</a>. All three are required for official recognition.</span>
+    </li>
+  </ul>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- BADGE -->
+<section>
+  <p class="section-label">The Reward</p>
+  <h2>Tres Locos Badge</h2>
+  <p>Twelve summit hits, all completed on the same calendar day. To claim your Tres Locos badge and be added to the Wall of Fame, complete all three steps: submit your attempt using the official form at phoenixphearsomephour.com, provide a link to your public Strava activity showing all twelve summit hits, and post it to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color:var(--tier-a);">facebook.com/groups/phoenixphearsomephour</a>. All three are required.</p>
+
+  <div class="badge-block">
+    <div class="badge-swatch">
+      <div class="swatch-a"></div>
+      <div class="swatch-b"></div>
+    </div>
+    <div class="badge-info">
+      <h3>Tres Locos</h3>
+      <p class="badge-meta">Tier 3 &bull; Burnt Red + Charcoal &bull; Twelve Summits &bull; The Point of No Return</p>
+      <p>The Tres Locos badge runs in burnt red and charcoal. The palette is darker than Tiers 1 and 2 because the tier is. Twelve summits, four peaks, one day. The desert earns this badge on your behalf across every ascent. Submit your completion and claim it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- WALL OF FAME -->
+<section>
+  <p class="section-label">Wall of Fame</p>
+  <h2>You Did It.</h2>
+  <p>If you are reading this after completing Tres Locos, this section is for you. Four peaks. Twelve summits. Same calendar day. You have done something that the overwhelming majority of people who trail run and hike these mountains regularly have not done and will not do. That is worth noting.</p>
+
+  <div style="border: 1px solid rgba(139,46,46,0.4); background: rgba(139,46,46,0.05); padding: 2.5rem; margin-top: 2rem;">
+    <p class="section-label" style="margin-bottom: 1.5rem;">Claim Your Spot</p>
+    <p style="color: var(--bone); font-size: 1.05rem; margin-bottom: 1.5rem;">Three steps to make it official and earn your place on the Tres Locos Wall of Fame.</p>
+
+    <ul class="rules-list" style="margin-top: 0;">
+      <li>
+        <span class="rule-num" style="color: var(--tier-a);">01</span>
+        <span>Submit your attempt using the official form on this site. Include your name, date of completion, and a link to your public Strava activity showing all twelve summit hits.</span>
+      </li>
+      <li>
+        <span class="rule-num" style="color: var(--tier-a);">02</span>
+        <span>Make sure your Strava activity is set to public before you submit. That recording is the official documentation of your completion. It needs to be visible to be verified.</span>
+      </li>
+      <li>
+        <span class="rule-num" style="color: var(--tier-a);">03</span>
+        <span>Post your completion to the Phoenix Phearsome Phour Facebook group at <a href="https://www.facebook.com/groups/phoenixphearsomephour" target="_blank" style="color: var(--tier-a);">facebook.com/groups/phoenixphearsomephour</a>. The community wants to know. Tell them.</span>
+      </li>
+    </ul>
+
+    <p style="margin-top: 2rem; margin-bottom: 0; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--tier-a); letter-spacing: 0.1em;">All three steps required. Complete them all and your name goes on the wall.</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
+<section>
+  <p class="section-label">What Comes Next</p>
+  <h2>Tres Locos Is Not the Top</h2>
+  <p>El Cuatro is Tier 4. Four summits per peak, sixteen total, all on the same calendar day. That is the ceiling of the tier system. Above the tier system is the Phoenix Phearsome Phour 70K, a continuous out-and-back ultra hitting all four peaks with eight total summit hits across roughly forty-four miles.</p>
+  <p>Full documentation for El Cuatro and the 70K Ultra route is at phoenixphearsomephour.com. If you are standing here, on the other side of Tres Locos, the question of what comes next is already forming. You know what it is. You are the right person to ask it.</p>
+</section>
+
+<footer>
+  &copy; Phoenix Phearsome Phour Challenge &bull; Matthew Hinman &bull; phoenixphearsomephour.com
+</footer>
+
+</body>
+</html>
