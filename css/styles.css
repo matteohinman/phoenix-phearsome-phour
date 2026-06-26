@@ -461,10 +461,28 @@ table.leaderboard th {
   margin-bottom: 1rem;
 }
 
-.route-photo:hover {
+.route-card {
+  display: block;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.route-card:hover {
+  opacity: 0.88;
+  text-decoration: none;
+}
+
+.route-card:hover .route-photo {
   border-color: var(--accent);
   color: var(--accent);
-  text-decoration: none;
+}
+
+.route-card .cta {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .route-photo-lg {
