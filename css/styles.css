@@ -450,6 +450,8 @@ table.leaderboard th {
   align-items: center;
   justify-content: center;
   aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
   background: var(--bg);
   border: 1px dashed var(--border);
   border-radius: 6px;
