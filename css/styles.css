@@ -495,11 +495,13 @@ table.leaderboard th {
 
 .form-embed {
   margin-top: 1.5rem;
-  border: 1px dashed var(--border);
+  border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  color: var(--muted);
+  overflow: hidden;
+}
+
+.form-embed iframe {
+  display: block;
 }
 
 .map-address {
