@@ -211,6 +211,7 @@
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    text-align: center;
     color: var(--dust);
   }
 
@@ -553,9 +554,14 @@
   <div class="elev-chart">
     <svg viewBox="0 0 900 175" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <!-- Grid lines -->
-      <line x1="0" y1="40" x2="900" y2="40" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
-      <line x1="0" y1="90" x2="900" y2="90" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
-      <line x1="0" y1="140" x2="900" y2="140" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+      <line x1="0" y1="30" x2="900" y2="30" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+      <line x1="0" y1="86" x2="900" y2="86" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+      <line x1="0" y1="142" x2="900" y2="142" stroke="rgba(201,150,42,0.08)" stroke-width="1"/>
+
+      <!-- Elevation axis -->
+      <text x="2" y="27" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="start">2,500 ft</text>
+      <text x="2" y="83" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="start">2,000 ft</text>
+      <text x="2" y="139" fill="rgba(176,164,138,0.4)" font-size="7" font-family="Courier New" text-anchor="start">1,500 ft</text>
 
       <defs>
         <linearGradient id="elevGrad" x1="0" y1="0" x2="0" y2="1">
