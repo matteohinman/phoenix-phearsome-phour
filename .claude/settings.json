@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(GIT_COMMITTER_NAME='Matteo Hinman' GIT_COMMITTER_EMAIL=222314594+matteohinman@users.noreply.github.com git commit '--author=Matteo Hinman <222314594+matteohinman@users.noreply.github.com>' -m ' *)",
+      "Bash(git push *)",
+      "Bash(curl -s \"https://phoenixphearsomephour.com/index.html\")",
+      "Bash(curl -s \"https://phoenixphearsomephour.com/camelback-mountain.html\")",
+      "Bash(curl -sI \"https://phoenixphearsomephour.com/camelback-mountain.html\")"
+    ]
+  }
+}
