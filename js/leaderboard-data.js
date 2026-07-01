@@ -11,6 +11,7 @@ const leaderboardEntries = [
   { name: "Wayne Jung", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "3:22:49" },
   { name: "Tina Thompson", tierKey: "uno-fresco", gender: "F", age: "N/S", date: "2019-07-28", time: "4:36:48" },
   { name: "Amber Nichelle", tierKey: "uno-fresco", gender: "F", age: "N/S", date: "2019-07-27", time: "3:27:53" },
+  { name: "John Malloy", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "2:15:52" },
 ];
 
 const leaderboardTiers = [
