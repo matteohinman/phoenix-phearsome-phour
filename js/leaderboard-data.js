@@ -9,6 +9,7 @@ const leaderboardEntries = [
   { name: "Sabrina Huelga", tierKey: "uno-fresco", gender: "F", age: "N/S", date: "2019-10-19", time: "3:15:55" },
   { name: "Joe Shea", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "2:54:57" },
   { name: "Wayne Jung", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "3:22:49" },
+  { name: "Tina Thompson", tierKey: "uno-fresco", gender: "F", age: "N/S", date: "2019-07-28", time: "4:36:48" },
 ];
 
 const leaderboardTiers = [
