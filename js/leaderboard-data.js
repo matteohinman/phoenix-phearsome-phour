@@ -37,7 +37,10 @@ function renderTabs() {
 
 function renderLeaderboard() {
   const root = document.getElementById("leaderboard-root");
-  const entries = leaderboardEntries.filter((e) => e.tierKey === activeTier);
+  const toSecs = (t) => t.split(":").reduce((acc, v, i, arr) => acc + parseInt(v) * Math.pow(60, arr.length - 1 - i), 0);
+  const entries = leaderboardEntries
+    .filter((e) => e.tierKey === activeTier)
+    .sort((a, b) => toSecs(a.time) - toSecs(b.time));
 
   if (!entries.length) {
     root.innerHTML =
