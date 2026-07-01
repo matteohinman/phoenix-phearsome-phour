@@ -14,6 +14,7 @@ const leaderboardEntries = [
   { name: "John Malloy", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "2:15:52" },
   { name: "Andrew Smith", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "2:19:37" },
   { name: "Matthew Hinman", tierKey: "uno-fresco", gender: "M", age: 49, date: "2023-07-29", time: "2:48:13" },
+  { name: "Matthew Hinman", tierKey: "dos-caliente", gender: "M", age: 46, date: "2020-08-29", time: "5:53:44" },
 ];
 
 const leaderboardTiers = [
