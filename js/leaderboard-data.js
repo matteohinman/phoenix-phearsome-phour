@@ -3,6 +3,7 @@
 // Example: { name: "Jane Doe", tierKey: "el-cuatro", gender: "F", age: 34, date: "2026-05-01", time: "18:42" }
 const leaderboardEntries = [
   { name: "Pascal Bourut", tierKey: "uno-fresco", gender: "M", age: 40, date: "2020-03-04", time: "2:36:13" },
+  { name: "Jeremy Harper", tierKey: "uno-fresco", gender: "M", age: "N/A", date: "2020-08-29", time: "3:41:24" },
 ];
 
 const leaderboardTiers = [
