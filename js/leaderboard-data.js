@@ -3,11 +3,12 @@
 // Example: { name: "Jane Doe", tierKey: "el-cuatro", gender: "F", age: 34, date: "2026-05-01", time: "18:42" }
 const leaderboardEntries = [
   { name: "Pascal Bourut", tierKey: "uno-fresco", gender: "M", age: 40, date: "2020-03-04", time: "2:36:13" },
-  { name: "Jeremy Harper", tierKey: "uno-fresco", gender: "M", age: "N/A", date: "2020-08-29", time: "3:41:24" },
-  { name: "Sean Caudill", tierKey: "uno-fresco", gender: "M", age: "N/A", date: "2020-08-29", time: "2:14:26" },
-  { name: "Nicholas Mazur", tierKey: "uno-fresco", gender: "M", age: "N/A", date: "2020-08-29", time: "2:35:48" },
-  { name: "Sabrina Huelga", tierKey: "uno-fresco", gender: "F", age: "N/A", date: "2019-10-19", time: "3:15:55" },
-  { name: "Joe Shea", tierKey: "uno-fresco", gender: "M", age: "N/A", date: "2019-07-27", time: "2:54:57" },
+  { name: "Jeremy Harper", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2020-08-29", time: "3:41:24" },
+  { name: "Sean Caudill", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2020-08-29", time: "2:14:26" },
+  { name: "Nicholas Mazur", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2020-08-29", time: "2:35:48" },
+  { name: "Sabrina Huelga", tierKey: "uno-fresco", gender: "F", age: "N/S", date: "2019-10-19", time: "3:15:55" },
+  { name: "Joe Shea", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "2:54:57" },
+  { name: "Wayne Jung", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2019-07-27", time: "3:22:49" },
 ];
 
 const leaderboardTiers = [
