@@ -2,12 +2,7 @@
 // tierKey must be one of: uno-fresco, dos-caliente, tres-locos, el-cuatro, ultra-70k
 // Example: { name: "Jane Doe", tierKey: "el-cuatro", gender: "F", age: 34, date: "2026-05-01", time: "18:42" }
 const leaderboardEntries = [
-  { name: "Lorem Ipsum", tierKey: "uno-fresco", gender: "M", age: 29, date: "2026-01-12", time: "17:42" },
-  { name: "Dolor Sit", tierKey: "dos-caliente", gender: "F", age: 34, date: "2026-01-19", time: "18:08" },
-  { name: "Amet Consectetur", tierKey: "tres-locos", gender: "M", age: 41, date: "2026-02-02", time: "20:55" },
-  { name: "Adipiscing Elit", tierKey: "el-cuatro", gender: "F", age: 27, date: "2026-02-14", time: "17:30" },
-  { name: "Sed Do Eiusmod", tierKey: "ultra-70k", gender: "M", age: 38, date: "2026-02-21", time: "19:47" },
-  { name: "Tempor Incididunt", tierKey: "uno-fresco", gender: "F", age: 31, date: "2026-03-01", time: "21:15" },
+  { name: "Pascal Bourut", tierKey: "uno-fresco", gender: "M", age: 40, date: "2020-03-04", time: "2:36:13" },
 ];
 
 const leaderboardTiers = [
