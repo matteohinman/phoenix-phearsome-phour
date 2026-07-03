@@ -40,6 +40,15 @@
     .form-note { font-size: 0.82rem; color: var(--text-muted, #a0907a); margin-top: 0.35rem; }
     .form-success { display: none; padding: 2rem; background: var(--card-bg, #1a1610); border: 1px solid var(--accent, #c9962a); border-radius: 8px; text-align: center; max-width: 560px; margin-top: 2rem; }
     .form-success h3 { color: var(--accent, #c9962a); margin-bottom: 0.5rem; }
+    .form-required-note { font-size: 0.82rem; color: var(--text-muted, #a0907a); margin-bottom: 1.5rem; }
+    .snark-toast {
+      position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%) translateY(-120%);
+      background: #2a1a0e; border: 1px solid #e05c5c; border-radius: 8px;
+      padding: 0.9rem 1.4rem; color: #f0d0c0; font-size: 0.95rem; font-weight: 500;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5); z-index: 9999; max-width: 420px; width: calc(100% - 2rem);
+      text-align: center; transition: transform 0.3s ease;
+    }
+    .snark-toast.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -80,6 +89,9 @@
       </ul>
 
       <h2>Submit Your Result</h2>
+      <p class="form-required-note">All fields are required.</p>
+
+      <div class="snark-toast" id="snarkToast"></div>
 
       <form class="submit-form" id="submitForm" novalidate>
         <div class="form-group">
@@ -128,16 +140,36 @@
       </div>
 
       <script>
+        const snarkMessages = [
+          "You climbed four mountains but can't fill out a form? All fields are required.",
+          "Almost. Turns out every field is mandatory. Yes, even that one.",
+          "We hike at 5am. We can handle a complete form. Fill it all in.",
+          "The mountain didn't let you skip any summits. Don't skip any fields.",
+          "Nice try. All fields required. No shortcuts here either.",
+          "You made it up Camelback but stumbled on a form? Fill everything in.",
+          "You didn't come this far to leave a field blank. Try again."
+        ];
+        let snarkTimer;
+        function showSnark() {
+          const toast = document.getElementById('snarkToast');
+          toast.textContent = snarkMessages[Math.floor(Math.random() * snarkMessages.length)];
+          toast.classList.add('show');
+          clearTimeout(snarkTimer);
+          snarkTimer = setTimeout(() => toast.classList.remove('show'), 4500);
+        }
+
         document.getElementById('submitForm').addEventListener('submit', async function(e) {
           e.preventDefault();
           const form = e.target;
           const genderError = document.getElementById('genderError');
-          if (!form.querySelector('input[name="entry.1273546212"]:checked')) {
-            genderError.style.display = 'block';
+          const genderChecked = form.querySelector('input[name="entry.1273546212"]:checked');
+          const formValid = form.checkValidity();
+          if (!formValid || !genderChecked) {
+            if (!genderChecked) genderError.style.display = 'block';
+            showSnark();
             return;
           }
           genderError.style.display = 'none';
-          if (!form.checkValidity()) { form.reportValidity(); return; }
           const btn = form.querySelector('button[type="submit"]');
           btn.disabled = true;
           btn.textContent = 'Submitting...';
