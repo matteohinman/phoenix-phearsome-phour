@@ -102,14 +102,15 @@
         <div class="form-group">
           <label>Gender</label>
           <div class="radio-group">
-            <label><input type="radio" name="entry.1273546212" value="Male"> Male</label>
-            <label><input type="radio" name="entry.1273546212" value="Female"> Female</label>
+            <label><input type="radio" name="entry.1273546212" value="Male" required> Male</label>
+            <label><input type="radio" name="entry.1273546212" value="Female" required> Female</label>
           </div>
+          <p class="form-note" id="genderError" style="display:none;color:#e05c5c;">Please select a gender.</p>
         </div>
 
         <div class="form-group">
-          <label for="age">Age <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <input type="number" id="age" name="entry.1435247792" min="1" max="120" placeholder="e.g. 34">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="entry.1435247792" min="1" max="120" placeholder="e.g. 34" required>
         </div>
 
         <div class="form-group">
@@ -130,6 +131,13 @@
         document.getElementById('submitForm').addEventListener('submit', async function(e) {
           e.preventDefault();
           const form = e.target;
+          const genderError = document.getElementById('genderError');
+          if (!form.querySelector('input[name="entry.1273546212"]:checked')) {
+            genderError.style.display = 'block';
+            return;
+          }
+          genderError.style.display = 'none';
+          if (!form.checkValidity()) { form.reportValidity(); return; }
           const btn = form.querySelector('button[type="submit"]');
           btn.disabled = true;
           btn.textContent = 'Submitting...';
