@@ -42,21 +42,59 @@
     </div>
   </header>
 
+  <style>
+    .merch-intro { max-width: 60ch; }
+    .sticker-feature { display: flex; flex-direction: column; align-items: center; margin: 2.5rem 0; }
+    .sticker-feature video,
+    .sticker-feature img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 40px rgba(201,150,42,0.25); }
+    .sticker-feature .sticker-label { margin-top: 1rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted, #a0907a); }
+    .sticker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 2rem; margin: 2rem 0; }
+    .sticker-card { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .sticker-card img { width: 120px; height: 120px; object-fit: contain; border-radius: 50%; transition: transform 0.2s ease; }
+    .sticker-card:hover img { transform: scale(1.06); }
+    .sticker-card span { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted, #a0907a); text-align: center; }
+    .merch-cta { margin-top: 2.5rem; padding: 1.75rem 2rem; background: var(--card-bg, #1a1610); border: 1px solid var(--border, rgba(201,150,42,0.25)); border-radius: 8px; max-width: 520px; }
+    .merch-cta h3 { margin-bottom: 0.5rem; color: var(--accent, #c9962a); }
+  </style>
+
   <main>
     <div class="container">
       <h1>Merch</h1>
-      <p>There is no merch yet. We know. We're working on it with the same urgency we bring to hydration planning, which is to say: eventually, probably after you've already finished El Cuatro twice and started asking when the shirt drops. Turns out building a route, a leaderboard, and an entire tier system doesn't leave much bandwidth for screen-printing. Who could have guessed.</p>
+      <p class="merch-intro">Stickers are on the way. Six designs, one for the challenge and one for each tier. Follow us on social to be the first to know when they drop.</p>
 
-      <h2>What's Coming (Eventually)</h2>
-      <ul>
-        <li>Shirts built to be sweated through on all four peaks, because cotton is a lifestyle choice we respect but cannot recommend</li>
-        <li>Stickers that will sun-bleach into oblivion within a season, just like everything else out here, including your motivation around mile 30</li>
-        <li>A hat, because someone always forgets a hat, and that someone is always you</li>
-        <li>A water bottle sticker, assuming you remembered to bring a water bottle, which, statistically, you did not</li>
-      </ul>
+      <h2>Phoenix Phearsome Phour Challenge</h2>
+      <div class="sticker-feature">
+        <video src="assets/ppp_circular_video.mp4" autoplay loop muted playsinline poster="assets/ppp_circular.png" aria-label="Phoenix Phearsome Phour Challenge sticker"></video>
+        <span class="sticker-label">Challenge Sticker</span>
+      </div>
 
-      <div class="form-embed">
-        <p>Merch store coming soon. Until then, the look on your face at mile 12, somewhere between regret and a full personality shift, will have to do.</p>
+      <h2>Tier Stickers</h2>
+      <div class="sticker-grid">
+        <div class="sticker-card">
+          <img src="assets/uno_fresco_patch_thumb.webp" width="120" height="120" alt="Uno Fresco sticker">
+          <span>Uno Fresco</span>
+        </div>
+        <div class="sticker-card">
+          <img src="assets/dos_caliente_patch_thumb.webp" width="120" height="120" alt="Dos Caliente sticker">
+          <span>Dos Caliente</span>
+        </div>
+        <div class="sticker-card">
+          <img src="assets/tres_locos_patch_thumb.webp" width="120" height="120" alt="Tres Locos sticker">
+          <span>Tres Locos</span>
+        </div>
+        <div class="sticker-card">
+          <img src="assets/el_cuatro_patch_thumb.webp" width="120" height="120" alt="El Cuatro sticker">
+          <span>El Cuatro</span>
+        </div>
+        <div class="sticker-card">
+          <img src="assets/ultra_patch_thumb.webp" width="120" height="120" alt="70K Ultra sticker">
+          <span>70K Ultra</span>
+        </div>
+      </div>
+
+      <div class="merch-cta">
+        <h3>Store coming soon</h3>
+        <p>We're working out the details. Follow us on <a href="https://www.instagram.com/phoenixphearsomephour/" target="_blank" rel="noopener noreferrer">Instagram</a> and <a href="https://www.facebook.com/phoenixphearsomephour" target="_blank" rel="noopener noreferrer">Facebook</a> to find out when they're available.</p>
       </div>
     </div>
   </main>
