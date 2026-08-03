@@ -1,0 +1,14 @@
+# Never apply line-ending conversion to binary assets.
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.webp binary
+*.mp4  binary
+*.ico  binary
+
+# Web sources keep LF in the repo.
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.svg  text eol=lf
+*.xml  text eol=lf
