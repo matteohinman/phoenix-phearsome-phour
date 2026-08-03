@@ -204,6 +204,25 @@
     width: 100%;
   }
 
+  /* Matted variant: narrower, padded, with a gold hairline inside the mat */
+  .route-map.framed {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.85rem;
+    background: var(--charcoal);
+    border-color: rgba(201,150,42,0.3);
+  }
+
+  .route-map.framed img {
+    border: 1px solid rgba(201,150,42,0.25);
+  }
+
+  .route-map.framed .caption {
+    background: transparent;
+    padding: 0.9rem 0.5rem 0.15rem;
+  }
+
   .route-map .caption {
     margin-bottom: 0;
     max-width: none;
@@ -613,6 +632,20 @@
 
 <div class="full-rule"></div>
 
+<!-- START / FINISH LINE -->
+<section>
+  <p class="section-label">Start / Finish</p>
+  <h2>Where the Clock Starts</h2>
+  <p>The line is on 36th St at Pima Canyon Dr, at the entrance to the Phoenix Mountain Preserve. Park on the street on the west side of 36th St. Do not park on church property at Lincoln and 36th St. You will pass through this point twice: once heading south into the Camelback yoyo, and once more at mile 43.8 on your way in.</p>
+
+  <div class="route-map framed">
+    <img src="assets/start_finish_line.jpg" alt="Satellite map showing the Phoenix Phearsome Phour 70K start and finish line on 36th St at Pima Canyon Dr, at the entrance to the Phoenix Mountain Preserve" loading="lazy" width="1141" height="845">
+    <p class="caption">Start / Finish Line &middot; 36th St at Pima Canyon Dr &middot; 1,474 ft</p>
+  </div>
+</section>
+
+<div class="full-rule"></div>
+
 <!-- WAYPOINTS -->
 <section>
   <p class="section-label">Key Waypoints</p>
@@ -1000,9 +1033,8 @@
   <p>Everything on this page, packaged as a single PDF you can save or print and take with you.</p>
 
   <div class="strava-block">
-    <p>PDF download coming soon.</p>
-    <!-- TODO: replace this placeholder with a real download link once the PDF is ready -->
-    <!-- <a href="assets/ultra-route.pdf" class="strava-link" download>Download the PDF &darr;</a> -->
+    <p>PPP Ultra Route &bull; PDF &bull; 684 KB</p>
+    <a href="assets/ppp-ultra-route.pdf" class="strava-link" download>Download the PDF &darr;</a>
   </div>
 </section>
 
