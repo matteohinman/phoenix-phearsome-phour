@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,39 +18,9 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="css/styles.css?v=7">
   <style>
-    .submit-form { max-width: 560px; margin-top: 2rem; }
-    .form-group { margin-bottom: 1.5rem; }
-    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted, #a0907a); margin-bottom: 0.5rem; }
-    .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group input[type="email"],
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: 0.65rem 0.85rem; background: var(--card-bg, #1a1610);
-      border: 1px solid var(--border, rgba(201,150,42,0.25)); border-radius: 6px;
-      color: var(--text, #e8dcc8); font-size: 1rem; font-family: inherit;
-      box-sizing: border-box; transition: border-color 0.15s ease;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { outline: none; border-color: var(--accent, #c9962a); }
-    .form-group select option { background: #1a1610; }
-    .form-group textarea { resize: vertical; min-height: 110px; }
-    .radio-group { display: flex; gap: 1.5rem; margin-top: 0.25rem; }
-    .radio-group label { display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text, #e8dcc8); cursor: pointer; }
-    .radio-group input[type="radio"] { accent-color: var(--accent, #c9962a); width: 1rem; height: 1rem; }
+    .submit-cta { margin: 1.75rem 0 2.25rem; }
+    .submit-cta .form-note { margin-top: 0.6rem; }
     .form-note { font-size: 0.82rem; color: var(--text-muted, #a0907a); margin-top: 0.35rem; }
-    .form-success { display: none; padding: 2rem; background: var(--card-bg, #1a1610); border: 1px solid var(--accent, #c9962a); border-radius: 8px; text-align: center; max-width: 560px; margin-top: 2rem; }
-    .form-success h3 { color: var(--accent, #c9962a); margin-bottom: 0.5rem; }
-    .form-required-note { font-size: 0.82rem; color: var(--text-muted, #a0907a); margin-bottom: 1.5rem; }
-    .snark-toast {
-      position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%) translateY(-120%);
-      background: #2a1a0e; border: 1px solid #e05c5c; border-radius: 8px;
-      padding: 0.9rem 1.4rem; color: #f0d0c0; font-size: 0.95rem; font-weight: 500;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.5); z-index: 9999; max-width: 420px; width: calc(100% - 2rem);
-      text-align: center; transition: transform 0.3s ease;
-    }
-    .snark-toast.show { transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -91,117 +61,14 @@
       </ul>
 
       <h2>Submit Your Result</h2>
-      <p class="form-required-note">All fields are required.</p>
+      <p>Submissions run through our Google Form. It takes about a minute, and every field is required. You will get an emailed copy of your answers, and we use your address only if we need to ask about your submission.</p>
 
-      <div class="snark-toast" id="snarkToast"></div>
-
-      <form class="submit-form" id="submitForm" novalidate>
-        <div class="form-group">
-          <label for="fullName">Full Name</label>
-          <input type="text" id="fullName" name="entry.525735177" required placeholder="First and last name">
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          <!-- Google Forms collects this under the fixed name emailAddress, not an entry id.
-               Requires the form's "Collect email addresses" set to Responder input. -->
-          <input type="email" id="email" name="emailAddress" required placeholder="you@example.com">
-          <p class="form-note">Only used to contact you about your submission. Google sends you a copy of your responses.</p>
-        </div>
-
-        <div class="form-group">
-          <label for="challenge">Challenge Tier</label>
-          <select id="challenge" name="entry.1150894213" required>
-            <option value="">Select a tier...</option>
-            <option value="Uno Fresco">Uno Fresco</option>
-            <option value="Dos Caliente">Dos Caliente</option>
-            <option value="Tres Locos">Tres Locos</option>
-            <option value="El Cuatro">El Cuatro</option>
-            <option value="70K Ultra">70K Ultra</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Gender</label>
-          <div class="radio-group">
-            <label><input type="radio" name="entry.1273546212" value="Male" required> Male</label>
-            <label><input type="radio" name="entry.1273546212" value="Female" required> Female</label>
-            <label><input type="radio" name="entry.1273546212" value="Non-Binary" required> Non-Binary</label>
-          </div>
-          <p class="form-note" id="genderError" style="display:none;color:#e05c5c;">Please select a gender.</p>
-        </div>
-
-        <div class="form-group">
-          <label for="age">Age</label>
-          <input type="number" id="age" name="entry.1435247792" min="1" max="120" placeholder="e.g. 34" required>
-        </div>
-
-        <div class="form-group">
-          <label for="stravaUrls">Strava Links</label>
-          <textarea id="stravaUrls" name="entry.969096334" required placeholder="Paste one Strava link per line. Ultra: 1 link. All other tiers: 4 links, one per peak."></textarea>
-          <p class="form-note">All Strava activities must be set to Public or we cannot verify your result.</p>
-        </div>
-
-        <button type="submit" class="btn solid">Submit Your Finish</button>
-      </form>
-
-      <div class="form-success" id="formSuccess">
-        <h3>Submission received!</h3>
-        <p>Thanks for submitting. We'll review your Strava links and add you to the leaderboard once verified. Keep an eye on the <a href="leaderboard.html">Leaderboard</a>.</p>
+      <div class="submit-cta">
+        <a class="btn solid" href="https://docs.google.com/forms/d/e/1FAIpQLSemeU58lIKQTYBnLn0ZFR6hA--n7b5jxi7JhdSAv2VSkImJzw/viewform" target="_blank" rel="noopener noreferrer">Open the Submission Form &rarr;</a>
+        <p class="form-note">Opens in a new tab.</p>
       </div>
 
-      <script>
-        const snarkMessages = [
-          "You climbed four mountains but can't fill out a form? All fields are required.",
-          "Almost. Turns out every field is mandatory. Yes, even that one.",
-          "We hike at 5am. We can handle a complete form. Fill it all in.",
-          "The mountain didn't let you skip any summits. Don't skip any fields.",
-          "Nice try. All fields required. No shortcuts here either.",
-          "You made it up Camelback but stumbled on a form? Fill everything in.",
-          "You didn't come this far to leave a field blank. Try again."
-        ];
-        let snarkTimer;
-        function showSnark() {
-          const toast = document.getElementById('snarkToast');
-          toast.textContent = snarkMessages[Math.floor(Math.random() * snarkMessages.length)];
-          toast.classList.add('show');
-          clearTimeout(snarkTimer);
-          snarkTimer = setTimeout(() => toast.classList.remove('show'), 4500);
-        }
-
-        document.getElementById('submitForm').addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const form = e.target;
-          const genderError = document.getElementById('genderError');
-          const genderChecked = form.querySelector('input[name="entry.1273546212"]:checked');
-          const formValid = form.checkValidity();
-          if (!formValid || !genderChecked) {
-            if (!genderChecked) genderError.style.display = 'block';
-            showSnark();
-            return;
-          }
-          genderError.style.display = 'none';
-          const btn = form.querySelector('button[type="submit"]');
-          btn.disabled = true;
-          btn.textContent = 'Submitting...';
-
-          // Posted straight from the visitor's browser on purpose. Google rejects
-          // these same fields with a 400 when the POST comes from a datacenter IP,
-          // so proxying it through a Worker breaks submissions that work fine from
-          // a real browser. The trade-off is that no-cors makes the response
-          // opaque and failures cannot be detected here.
-          try {
-            await fetch('https://docs.google.com/forms/d/e/1FAIpQLSemeU58lIKQTYBnLn0ZFR6hA--n7b5jxi7JhdSAv2VSkImJzw/formResponse', {
-              method: 'POST',
-              mode: 'no-cors',
-              body: new FormData(form)
-            });
-          } catch (err) { /* no-cors always throws; the POST still goes out */ }
-
-          form.style.display = 'none';
-          document.getElementById('formSuccess').style.display = 'block';
-        });
-      </script>
+      <p>Once you have submitted, we review your Strava links and add you to the <a href="leaderboard.html">Leaderboard</a> after verifying the result.</p>
     </div>
   </main>
 
