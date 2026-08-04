@@ -194,6 +194,21 @@
     max-width: 65ch;
   }
 
+  /* Base link rule. Without this, any unclassed inline link falls back to
+     browser blue, which is invisible on this background. Class-based links
+     like .strava-link outrank this and keep their own treatment. */
+  a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,150,42,0.4);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  a:hover {
+    color: var(--white);
+    border-bottom-color: var(--white);
+  }
+
   /* ROUTE OVERVIEW */
   .route-map {
     margin-top: 2.5rem;
@@ -717,7 +732,7 @@
       <div class="whead">Official Event &middot; Feb 20, 2027</div>
       <div class="wtime">5:30 AM &ndash; 10:30 PM</div>
       <div class="wlimit">17 hour limit &middot; Field capped at 50</div>
-      <p>A mass start with everyone on the same clock, thirty minutes tighter at each end than the solo window. Free entry, no pacers, no supplied aid. <a href="events.html">See the event details &rarr;</a></p>
+      <p>A mass start with everyone on the same clock, thirty minutes tighter at each end than the solo window. Free entry, no pacers, no supplied aid. <a href="events.html">See the event details&nbsp;&rarr;</a></p>
     </div>
   </div>
 
