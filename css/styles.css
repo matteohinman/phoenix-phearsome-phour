@@ -395,10 +395,12 @@ main {
   color: var(--muted);
 }
 
-/* Hairline grid: cells sit on the border colour with 1px gaps showing through */
+/* Hairline grid: cells sit on the border colour with 1px gaps showing through.
+   Fixed 4 columns so the 8 cells always fill complete rows. auto-fit gave 5
+   across and left a ragged empty cell. */
 .event-spec {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   margin-bottom: 1.5rem;
   background: var(--border);
@@ -437,8 +439,16 @@ main {
   margin-bottom: 0.35rem;
 }
 
+/* Equal-width CTAs so neither button is sized by its label length */
 .event-feature .btn-row {
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 540px;
+}
+
+.event-feature .btn {
+  text-align: center;
 }
 
 /* Registration state, stated plainly next to the buttons */
@@ -455,11 +465,19 @@ main {
   color: var(--accent);
 }
 
+/* 8 cells divide evenly at 4, 2, and 1 columns, so no row is ever ragged */
+@media (max-width: 780px) {
+  .event-spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 540px) {
   .event-feature { padding: 1.4rem; }
   .event-feature h2 { font-size: 1.5rem; }
-  .event-feature .btn-row { justify-content: stretch; }
-  .event-feature .btn { flex: 1; text-align: center; }
+  .event-feature .btn-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 380px) {
+  .event-spec { grid-template-columns: minmax(0, 1fr); }
 }
 
 table.leaderboard {
