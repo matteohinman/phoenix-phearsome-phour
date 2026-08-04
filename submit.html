@@ -117,7 +117,12 @@
           <div class="radio-group">
             <label><input type="radio" name="entry.1273546212" value="Male" required> Male</label>
             <label><input type="radio" name="entry.1273546212" value="Female" required> Female</label>
+            <!-- The linked Google Form only declares Male and Female as choices, plus an
+                 "Other" slot. Posting "Non-Binary" directly would be rejected server side,
+                 so this selects Other and supplies the text in the companion field below. -->
+            <label><input type="radio" name="entry.1273546212" value="__other_option__" required> Non-Binary</label>
           </div>
+          <input type="hidden" id="genderOther" name="entry.1273546212.other_option_response" value="Non-Binary" disabled>
           <p class="form-note" id="genderError" style="display:none;color:#e05c5c;">Please select a gender.</p>
         </div>
 
@@ -171,6 +176,10 @@
             return;
           }
           genderError.style.display = 'none';
+          // Google only accepts the free-text companion when the choice is the Other
+          // slot. A disabled input is left out of FormData, so toggle it to match.
+          document.getElementById('genderOther').disabled =
+            genderChecked.value !== '__other_option__';
           const btn = form.querySelector('button[type="submit"]');
           btn.disabled = true;
           btn.textContent = 'Submitting...';
