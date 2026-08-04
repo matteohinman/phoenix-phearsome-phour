@@ -269,6 +269,57 @@
     margin-top: 0.4rem;
   }
 
+  /* TWO WINDOWS: solo attempt vs official event */
+  .window-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: rgba(201,150,42,0.15);
+    border: 1px solid rgba(201,150,42,0.15);
+    margin-top: 2.5rem;
+  }
+
+  .window-cell {
+    background: var(--charcoal);
+    padding: 1.75rem;
+  }
+
+  .window-cell.official {
+    background: #211c14;
+  }
+
+  .window-cell .whead {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+
+  .window-cell .wtime {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+
+  .window-cell .wlimit {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-top: 0.35rem;
+  }
+
+  .window-cell p {
+    font-size: 0.9rem;
+    margin: 1rem 0 0;
+    max-width: none;
+  }
+
   /* ELEVATION PROFILE */
   .elev-chart {
     width: 100%;
@@ -555,8 +606,8 @@
       <div class="key">Start / Finish Elevation</div>
     </div>
     <div class="overview-cell">
-      <div class="val">24 hr</div>
-      <div class="key">Time Limit (TBD)</div>
+      <div class="val">18 hr</div>
+      <div class="key">Time Limit</div>
     </div>
   </div>
 
@@ -645,6 +696,32 @@
     <img src="assets/start_finish_line.jpg" alt="Satellite map showing the Phoenix Phearsome Phour 70K start and finish line on 36th St at Pima Canyon Dr, at the entrance to the Phoenix Mountain Preserve" loading="lazy" width="1141" height="845">
     <p class="caption">Start / Finish Line &middot; 36th St at Pima Canyon Dr &middot; 1,474 ft</p>
   </div>
+</section>
+
+<div class="full-rule"></div>
+
+<!-- TIME WINDOWS -->
+<section>
+  <p class="section-label">Time Windows</p>
+  <h2>Two Ways to Run It</h2>
+  <p>You can run this route on your own on any day of your choosing, or you can run it with everyone else at the official event. Both are valid finishes. They operate on different clocks, so know which one you are running before you start.</p>
+
+  <div class="window-grid">
+    <div class="window-cell">
+      <div class="whead">Solo Attempt &middot; Any Day</div>
+      <div class="wtime">5:00 AM &ndash; 11:00 PM</div>
+      <div class="wlimit">18 hour limit &middot; Same calendar day</div>
+      <p>The standing challenge window, the same one every tier uses. Start no earlier than 5:00 a.m. at the start line and finish by 11:00 p.m. the same day. This is the window an FKT is judged against.</p>
+    </div>
+    <div class="window-cell official">
+      <div class="whead">Official Event &middot; Feb 20, 2027</div>
+      <div class="wtime">5:30 AM &ndash; 10:30 PM</div>
+      <div class="wlimit">17 hour limit &middot; Field capped at 50</div>
+      <p>A mass start with everyone on the same clock, thirty minutes tighter at each end than the solo window. Free entry, no pacers, no supplied aid. <a href="events.html">See the event details &rarr;</a></p>
+    </div>
+  </div>
+
+  <p style="margin-top:1.5rem; font-size:0.9rem;">Neither window overrides trail access hours. Camelback closes at sunset regardless of how much time you have left, and gated trailheads at Piestewa, North Mountain, and Shaw Butte close well before 11:00 p.m. See Trail Access Hours and Closures below.</p>
 </section>
 
 <div class="full-rule"></div>
@@ -954,7 +1031,7 @@
     </li>
     <li>
       <span class="rule-num">06</span>
-      <span>The route must be completed between 5 a.m. and 11 p.m. Know the access hours for each trail section (see Trail Access Hours and Closures below) before you start.</span>
+      <span>A solo attempt must be completed between 5 a.m. and 11 p.m. on a single calendar day, an 18 hour limit. The official event runs a tighter window of 5:30 a.m. to 10:30 p.m. See Two Ways to Run It above. Either way, know the access hours for each trail section (see Trail Access Hours and Closures below) before you start.</span>
     </li>
   </ul>
 </section>
