@@ -56,9 +56,11 @@ export async function onRequestPost({ request }) {
       body: params,
     });
   } catch {
+    // Deliberately a 4xx. Cloudflare replaces 5xx responses from a Function with
+    // its own branded error page, which would destroy the JSON body below.
     return json(
       { ok: false, error: "Could not reach Google Forms. Try again in a moment." },
-      502
+      424
     );
   }
 
@@ -76,7 +78,7 @@ export async function onRequestPost({ request }) {
         "Google Forms rejected the submission. Nothing was recorded, so please " +
         "get in touch rather than assuming it went through.",
     },
-    502
+    422
   );
 }
 
