@@ -1,6 +1,10 @@
 // Add a finisher by adding an object to this array, then redeploy.
 // tierKey must be one of: uno-fresco, dos-caliente, tres-locos, el-cuatro, ultra-70k
 // Example: { name: "Jane Doe", tierKey: "el-cuatro", gender: "F", age: 34, date: "2026-05-01", time: "18:42" }
+//
+// support: "Supported" or "Unsupported". Only tracked for the Ultra, and only
+// shown on that tab. Anything missing renders as N/S, matching how age does it.
+// Example: { name: "Jane Doe", tierKey: "ultra-70k", gender: "F", age: 34, date: "2027-02-20", time: "14:02:11", support: "Unsupported" }
 const leaderboardEntries = [
   { name: "Pascal Bourut", tierKey: "uno-fresco", gender: "M", age: 40, date: "2020-03-04", time: "2:36:13" },
   { name: "Jeremy Harper", tierKey: "uno-fresco", gender: "M", age: "N/S", date: "2020-08-29", time: "3:41:24" },
@@ -27,7 +31,19 @@ const leaderboardTiers = [
   { key: "ultra-70k", label: "Ultra" },
 ];
 
+const ULTRA_TIER_KEY = "ultra-70k";
+
 let activeTier = leaderboardTiers[0].key;
+
+// Unsupported is the harder claim, so it gets the accent. Anything unrecorded
+// falls back to N/S, the same marker the age column already uses.
+function supportCell(value) {
+  if (value !== "Supported" && value !== "Unsupported") {
+    return '<span class="lb-support unknown">N/S</span>';
+  }
+  const modifier = value === "Unsupported" ? "unsupported" : "supported";
+  return `<span class="lb-support ${modifier}">${value}</span>`;
+}
 
 function renderTabs() {
   const tabsRoot = document.querySelector(".lb-tabs");
@@ -60,16 +76,24 @@ function renderLeaderboard() {
     return;
   }
 
+  // Crewing is only tracked for the Ultra, so the column only exists on that tab
+  // rather than sitting empty across every other tier.
+  const showSupport = activeTier === ULTRA_TIER_KEY;
+
   const rows = entries
-    .map(
-      (e) =>
-        `<tr><td><span class="lb-badge ${e.tierKey}"><span class="swatch-a"></span><span class="swatch-b"></span></span></td><td>${e.name}</td><td>${e.gender}</td><td>${e.age}</td><td>${e.date}</td><td>${e.time}</td></tr>`
-    )
+    .map((e) => {
+      const support = showSupport
+        ? `<td>${supportCell(e.support)}</td>`
+        : "";
+      return `<tr><td><span class="lb-badge ${e.tierKey}"><span class="swatch-a"></span><span class="swatch-b"></span></span></td><td>${e.name}</td><td>${e.gender}</td><td>${e.age}</td>${support}<td>${e.date}</td><td>${e.time}</td></tr>`;
+    })
     .join("");
+
+  const supportHead = showSupport ? "<th>Support</th>" : "";
 
   root.innerHTML = `<table class="leaderboard">
     <thead>
-      <tr><th></th><th>Name</th><th>Gender</th><th>Age</th><th>Date</th><th>Time</th></tr>
+      <tr><th></th><th>Name</th><th>Gender</th><th>Age</th>${supportHead}<th>Date</th><th>Time</th></tr>
     </thead>
     <tbody>${rows}</tbody>
   </table>`;

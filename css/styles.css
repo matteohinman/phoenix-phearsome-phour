@@ -540,6 +540,28 @@ table.leaderboard th {
   border-bottom-color: var(--accent);
 }
 
+/* Crewing status, Ultra tab only. Unsupported is the harder claim so it carries
+   the accent; supported stays neutral rather than looking like a demerit. */
+.lb-support {
+  font-family: "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.lb-support.unsupported {
+  color: var(--accent);
+}
+
+.lb-support.supported {
+  color: var(--text);
+}
+
+.lb-support.unknown {
+  color: var(--muted);
+}
+
 .lb-badge {
   display: flex;
   flex-direction: column;
