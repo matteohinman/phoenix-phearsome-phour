@@ -315,6 +315,153 @@ main {
   max-width: 260px;
 }
 
+/* Homepage next-event strip: one hairline row, not a banner */
+.event-strip {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0 auto 2.5rem;
+  padding: 0.85rem 1.2rem;
+  max-width: 640px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 4px;
+  background: var(--bg-alt);
+  color: var(--text);
+}
+
+.event-strip:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.event-strip .label {
+  color: var(--accent);
+  font-family: "Courier New", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.event-strip .what {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.event-strip .go {
+  color: var(--accent);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* OFFICIAL EVENT
+   Rendered as a specification record rather than a promotional banner,
+   matching the documentary voice of the ultra route page. */
+.event-feature {
+  margin: 2rem 0 3rem;
+  padding: 2rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-alt);
+}
+
+.event-label {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-family: "Courier New", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.event-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.event-feature h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.9rem;
+}
+
+.event-feature .event-where {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+
+/* Hairline grid: cells sit on the border colour with 1px gaps showing through */
+.event-spec {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  margin-bottom: 1.5rem;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.event-spec div {
+  padding: 0.9rem 1rem;
+  background: var(--bg-alt);
+}
+
+.event-spec .val {
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.event-spec .key {
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.event-terms {
+  margin: 0 0 1.75rem;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.event-terms li {
+  margin-bottom: 0.35rem;
+}
+
+.event-feature .btn-row {
+  justify-content: flex-start;
+}
+
+/* Registration state, stated plainly next to the buttons */
+.event-status {
+  margin-top: 1.1rem;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.event-status .open {
+  color: var(--accent);
+}
+
+@media (max-width: 540px) {
+  .event-feature { padding: 1.4rem; }
+  .event-feature h2 { font-size: 1.5rem; }
+  .event-feature .btn-row { justify-content: stretch; }
+  .event-feature .btn { flex: 1; text-align: center; }
+}
+
 table.leaderboard {
   width: 100%;
   border-collapse: collapse;
